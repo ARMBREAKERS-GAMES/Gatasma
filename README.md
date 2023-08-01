@@ -18,3 +18,11 @@ Gugu é o único personagem capaz de pressionar os botões no chão;
 
 Paredes Ectoplásmicas são atravessados pela personagem Vivi;
 
+# Formas de receita
+Para se ter acesso a qualquer fase do jogo, assistir um anúncio é obrigatório.
+
+Para se livrar dos anúncios uma versão premium do jogo é disponibilizada.
+
+Assim sendo, o jogo pode ser jogado do começo ao fim de maneira gratuita.
+
+
