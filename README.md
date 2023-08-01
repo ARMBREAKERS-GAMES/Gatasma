@@ -25,6 +25,18 @@ Para se livrar dos anúncios uma versão premium do jogo é disponibilizada.
 
 Assim sendo, o jogo pode ser jogado do começo ao fim de maneira gratuita.
 
+#REFERÊNCIAS
+
+Franquia Fireboy e Watergirl; (Gameplay base)
+
+Undertale; (estilo artístico e vibe)
+
+Hollow Knight; (Feeling/Ambientação)
+
+Stop Motion’s do Tim Burton. (Estética Cute/Creepy)
+
+Músicas Góticas e melancólicas.
+
 
 
 
