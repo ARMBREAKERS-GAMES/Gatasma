@@ -25,13 +25,7 @@ Para se livrar dos anúncios uma versão premium do jogo é disponibilizada.
 
 Assim sendo, o jogo pode ser jogado do começo ao fim de maneira gratuita.
 
-#Referências
 
-REFERÊNCIAS
-
-Franquia Fireboy e Watergirl; (Gameplay base)
-
-Celeste; (estilo artístico)
 
 
 
