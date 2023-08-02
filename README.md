@@ -37,6 +37,34 @@ Stop Motion’s do Tim Burton. (Estética Cute/Creepy)
 
 Músicas Góticas e melancólicas.
 
+# REGRAS DO UNIVERSO:
+
+-Gatasma se passa em um planeta povoado por gatos Inteligentes;
+(Humanos não existem e nem existiram, outros animais existem porém apenas o gato  tem um intelecto avançado)
+
+-Neste mundo quando um gato morre vai parar no mundo dos mortos;
+(Quando Morrem eles viram Fantasmas, podem atravessar objetos, possuir coisas e voar, em contrapartida eles perdem a maioria dos sentidos, sobrando apenas visão e audição)
+
+-É comum que gatos fantasma consigam atravessar de um mundo para o outro;
+
+-Magia não é estranha neste mundo mas sim incomum, sendo o único mago conhecido o “Nekomanser”;
+Os gatos podem falar;
+
+REGRAS DO MICROCOSMO ONDE IRÁ SE PASSAR O JOGO:
+
+(O jogo vai se passar no castelo do “Nekomanser”)
+
+-Dentro do Castelo a maioria das propriedades mágicas dos fantasmas some.
+
+*(Isso devido ao fato do “Nekomanser” ter feito selos que limitam os poderes dos fantasmas dentro do seu castelo)
+
+-Vivi ainda terá a habilidade de atravessar algumas paredes.
+
+*(apenas as que o mago permitir)
+
+*(Isso por conta de um anel mágico que ela irá encontrar no castelo)
+
+-Gugu poderá ativar placas de pressão por ter achado um anel mágico que deixa ele mais pesado.
 
 
 
