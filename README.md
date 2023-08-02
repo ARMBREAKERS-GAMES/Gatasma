@@ -66,6 +66,20 @@ REGRAS DO MICROCOSMO ONDE IRÁ SE PASSAR O JOGO:
 
 -Gugu poderá ativar placas de pressão por ter achado um anel mágico que deixa ele mais pesado.
 
+# JOGO IDEAL:
+
+-O jogo teria Um estilo de arte similar a Celeste, sendo assim ele seria pixel art, apesar do estilo de arte de celeste ele iria passar um sentimento de suspense e estranheza por misturar estilos mais fofas com um terror gótico, para ajudar na ambientação o jogo teria uma trilha sonora de ambientação de suspense.
+
+-Na gameplay o jogo teria puzzles que fariam que os jogadores pensassem em conjunto para resolvê-los, e que evoluíram em dificuldade e mecânicas ao decorrer da gameplay.
+
+-O jogo teria uma história bem simples que teria como foco contextualizar o que os personagens estão fazendo, sendo assim ela não seria o foco do jogo.
+
+-Os personagens seriam carismáticos fazendo com que o jogador se apegue a eles, isso seria feito usando recursos simples como fofura e humor.
+
+-A relação dos gatos será explorada através de diálogos esporádicos que serão ditos pelos personagens aleatoriamente. 
+
+-Além dos diálogos a história será contada por cutscenes objetivas de imagens estáticas com textos explicativos e páginas do diário do Nekomancer, páginas estas adquiridas ao final de cada fase contando um pouco sobre a criação do elixir da vida e sobre o mistério do próprio mundo.
+
 
 
 
