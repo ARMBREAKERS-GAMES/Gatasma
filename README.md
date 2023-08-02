@@ -80,6 +80,15 @@ REGRAS DO MICROCOSMO ONDE IRÁ SE PASSAR O JOGO:
 
 -Além dos diálogos a história será contada por cutscenes objetivas de imagens estáticas com textos explicativos e páginas do diário do Nekomancer, páginas estas adquiridas ao final de cada fase contando um pouco sobre a criação do elixir da vida e sobre o mistério do próprio mundo.
 
+# OBJETIVOS DO JOGO:
+
+-Conseguir abrir a porta principal de cada nível para avançar ao próximo.
+
+-Recuperar as páginas do diário do Nekomancer para descobrir a história escondida.
+
+-Chegar ao elixir da vida e terminar o jogo.
+
+
 
 
 
