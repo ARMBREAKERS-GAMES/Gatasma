@@ -50,7 +50,7 @@ Músicas Góticas e melancólicas.
 -Magia não é estranha neste mundo mas sim incomum, sendo o único mago conhecido o “Nekomanser”;
 Os gatos podem falar;
 
-REGRAS DO MICROCOSMO ONDE IRÁ SE PASSAR O JOGO:
+## REGRAS DO MICROCOSMO ONDE IRÁ SE PASSAR O JOGO:
 
 (O jogo vai se passar no castelo do “Nekomanser”)
 
