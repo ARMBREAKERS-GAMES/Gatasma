@@ -11,17 +11,17 @@ export default class cena0 extends Phaser.Scene {
       frameHeight: 64
     })
 
-    this.load.spritesheet('direita', '../assets/direita.png', {
+    this.load.spritesheet('direita', '../assets/botao.png', {
       frameWidth: 64,
       frameHeight: 64
     })
 
-    this.load.spritesheet('esquerda', '../assets/esquerda.png', {
+    this.load.spritesheet('esquerda', '../assets/botao.png', {
       frameWidth: 64,
       frameHeight: 64
     })
 
-    this.load.spritesheet('cima', '../assets/cima.png', {
+    this.load.spritesheet('cima', '../assets/botao.png', {
       frameWidth: 64,
       frameHeight: 64
     })
@@ -84,7 +84,7 @@ export default class cena0 extends Phaser.Scene {
         this.personagem.anims.play('vivi-parado')
         this.personagem.setVelocityX(0)
       })
-    
+
     this.esquerda = this.add.sprite(50, 400, 'esquerda', 0)
       .setInteractive()
       .on('pointerdown', () => {
@@ -97,13 +97,14 @@ export default class cena0 extends Phaser.Scene {
         this.personagem.anims.play('vivi-parado')
         this.personagem.setVelocityX(0)
       })
-    
+
     this.cima = this.add.sprite(700, 400, 'cima', 0)
       .setInteractive()
       .on('pointerdown', () => {
         this.cima.setFrame(1)
         this.personagem.anims.play('vivi-cima', true)
         this.personagem.setVelocityY(-100)
+        
       })
       .on('pointerup', () => {
         this.cima.setFrame(0)
