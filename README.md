@@ -62,9 +62,7 @@ Os gatos podem falar;
 
 *(apenas as que o mago permitir)
 
-*(Isso por conta de um anel mágico que ela irá encontrar no castelo)
-
--Gugu poderá ativar placas de pressão por ter achado um anel mágico que deixa ele mais pesado.
+-Gugu poderá ativar placas de pressão.
 
 # JOGO IDEAL:
 
@@ -83,8 +81,6 @@ Os gatos podem falar;
 # OBJETIVOS DO JOGO:
 
 -Conseguir abrir a porta principal de cada nível para avançar ao próximo.
-
--Recuperar as páginas do diário do Nekomancer para descobrir a história escondida.
 
 -Chegar ao elixir da vida e terminar o jogo.
 
