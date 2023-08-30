@@ -33,10 +33,20 @@ export default class cena0 extends Phaser.Scene {
     this.personagem = this.physics.add.sprite(400, 255, 'gugu')
 
     this.anims.create({
-      key: 'gugu-parado',
+      key: 'gugu-parado-direita',
       frames: this.anims.generateFrameNumbers('gugu', {
         start: 0,
         end: 3
+      }),
+      frameRate: 3,
+      repeat: -1
+    })
+
+    this.anims.create({
+      key: 'gugu-parado-esquerda',
+      frames: this.anims.generateFrameNumbers('gugu', {
+        start: 8,
+        end: 11
       }),
       frameRate: 3,
       repeat: -1
@@ -72,7 +82,7 @@ export default class cena0 extends Phaser.Scene {
       })
       .on('pointerup', () => {
         this.direita.setFrame(0)
-        this.personagem.anims.play('gugu-parado')
+        this.personagem.anims.play('gugu-parado-direita')
         this.personagem.setVelocityX(0)
       })
 
@@ -85,14 +95,10 @@ export default class cena0 extends Phaser.Scene {
       })
       .on('pointerup', () => {
         this.esquerda.setFrame(0)
-        this.personagem.anims.play('gugu-parado')
+        this.personagem.anims.play('gugu-parado-esquerda')
         this.personagem.setVelocityX(0)
       })
-      .on('pointerup', () => {
-        this.cima.setFrame(0)
-        this.personagem.anims.play('gugu-parado')
-        this.personagem.setVelocityY(0)
-      })
+      
   }
 
   update () { }
