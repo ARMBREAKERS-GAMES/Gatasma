@@ -1,5 +1,7 @@
 # Gatasma
-![gatasma 2](https://github.com/ARMBREAKERS-GAMES/Gatasma/assets/141068211/c4400075-d9cf-4fc5-829f-50c3b6cfcc59)
+
+
+![gatasma3](https://github.com/ARMBREAKERS-GAMES/Gatasma/assets/141068211/4e055f87-f7a0-4d02-90ed-c255a7b1ca81)
 
 
 Gatasma é um jogo sobre um casal de gatinhos fantasmas (Gugu e Vivi) que entediados com a monotonia do mundo dos mortos resolvem ir até um antigo castelo de um bruxo para encontrar o elixir da vida e poder voltar às suas formas materiais. Neste terão de passar pelas completamente estranhas e sem sentido salas do castelo, repletas de puzzles provenientes da mente insana do misterioso mago "Nekomanser". As duas bolas de pelo ectoplásmicas terão de trabalhar juntos, puxando alavancas e apertando botões até chegar ao elixir da vida.
