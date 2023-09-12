@@ -126,19 +126,26 @@ export default class cena1 extends Phaser.Scene {
       })
       .setScrollFactor(0, 0)
     
-    this.cima = this.add.sprite(700, 400, 'cima', 0)
-      .setInteractive()
-      .on('pointerdown', () => {
-        
-        this.cima.setFrame(1)
-        this.personagem.setVelocityX(constant)
-      })
-      .on('pointerup', () => {
-        this.cima.setFrame(0)
-        this.personagem.setVelocityY(-100)
+   this.cima = this.add.sprite(700, 400, 'cima', 0)
+  .setInteractive()
+  .on('pointerdown', () => {
+    this.cima.setFrame(1);
+    this.personagem.setVelocityX(constant);
+  })
+  .on('pointerup', () => {
+    // Verifica se o personagem está colidindo com o "layerchaocortina" na parte de baixo
+    const bottomCheckPoint = this.personagem.y + this.personagem.displayHeight / 2 + 1; // Ponto abaixo do personagem
+    const isCollidingWithLayer = this.layerchaocortina.getTileAtWorldXY(this.personagem.x, bottomCheckPoint);
 
-      })
-      .setScrollFactor(0, 0)
+    if (isCollidingWithLayer) {
+      this.cima.setFrame(0);
+      this.personagem.setVelocityY(-100);
+    } else {
+      // Se não estiver colidindo, defina o frame como 0
+      this.cima.setFrame(0);
+    }
+  })
+  .setScrollFactor(0, 0);
     
     /*limites*/
 
