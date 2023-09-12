@@ -1,6 +1,8 @@
 export default class cena1 extends Phaser.Scene {
   constructor () {
     super('cena1')
+
+    this.velocidade = 200
   }
 
   /* sprites */
@@ -45,7 +47,7 @@ export default class cena1 extends Phaser.Scene {
 
     this.add.image(400, 225, 'Fundo')
     this.personagem = this.physics.add.sprite(400, 200, 'gugu')
-    
+    this.cameras.main.startFollow(this.personagem)
     
 
     this.anims.create({
