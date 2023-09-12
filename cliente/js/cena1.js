@@ -44,7 +44,9 @@ export default class cena1 extends Phaser.Scene {
     this.layercortina2 = this.tilemapcena1.createLayer('cortina', [this.tilesetcena1])
 
     this.add.image(400, 225, 'Fundo')
-    this.personagem = this.physics.add.sprite(400, 255, 'gugu')
+    this.personagem = this.physics.add.sprite(400, 200, 'gugu')
+    
+    
 
     this.anims.create({
       key: 'gugu-parado-direita',
@@ -86,6 +88,11 @@ export default class cena1 extends Phaser.Scene {
       repeat: -1
     })
 
+    this.anims.create({
+      key: 'gugu-cima',
+      
+    })
+
     /* botões */
     this.direita = this.add.sprite(150, 400, 'direita', 0)
       .setInteractive()
@@ -99,6 +106,7 @@ export default class cena1 extends Phaser.Scene {
         this.personagem.anims.play('gugu-parado-direita')
         this.personagem.setVelocityX(0)
       })
+    .setScrollFactor(0, 0)
 
     this.esquerda = this.add.sprite(50, 400, 'esquerda', 0)
       .setInteractive()
@@ -112,9 +120,29 @@ export default class cena1 extends Phaser.Scene {
         this.personagem.anims.play('gugu-parado-esquerda')
         this.personagem.setVelocityX(0)
       })
+      .setScrollFactor(0, 0)
+    
+    this.cima = this.add.sprite(700, 400, 'cima', 0)
+      .setInteractive()
+      .on('pointerdown', () => {
+        
+        this.cima.setFrame(1)
+        this.personagem.setVelocityX(constant)
+      })
+      .on('pointerup', () => {
+        this.cima.setFrame(0)
+        this.personagem.setVelocityY(-100)
 
-    // this.layerchaocortina.setCollisionByProperty({ collides: true })
-    // this.physics.add.collider(this.personagem, this.layerchaocortina)
+      })
+      .setScrollFactor(0, 0)
+    
+    /*limites*/
+
+    
+
+
+    this.layerchaocortina.setCollisionByProperty({ collides: true })
+    this.physics.add.collider(this.personagem, this.layerchaocortina)
   }
 
   update () { }
