@@ -7,6 +7,8 @@ export default class abertura extends Phaser.Scene {
       frameWidth: 800,
       frameHeight: 450,
     })
+
+    this.load.audio('musica_inicio', '../assets/ABERTURALULLABY.mp3')
   }
     create() {
       this.abertura = this.add.sprite(400, 225, 'abertura')
@@ -16,6 +18,8 @@ export default class abertura extends Phaser.Scene {
           this.game.scene.stop('abertura')
           this.game.scene.start('cena1')
         })
+      
+      this.musicaSound = this.sound.add('musica_inicio');
 
       /*Abertura*/
 
@@ -29,7 +33,8 @@ export default class abertura extends Phaser.Scene {
         repeat: -1
       })
 
-      this.abertura.anims.play('abertura')
+      this.abertura.anims.play('abertura');
+      this.musicaSound.play();
     }
   }
 
