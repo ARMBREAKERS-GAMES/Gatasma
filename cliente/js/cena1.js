@@ -49,8 +49,10 @@ export default class cena1 extends Phaser.Scene {
     this.add.image(400, 225, 'Fundo')
     this.personagem = this.physics.add.sprite(400, 200, 'gugu')
     
-
-    this.cameras.main.startFollow(this.personagem)
+    this.personagem.setCollideWorldBounds(true)
+    this.cameras.main.startFollow(this.personagem, false, 1, 0)
+    this.physics.world.setBounds(0, 0, 1120, 450)
+    this.cameras.main.setBounds(0, 0, 1120, 450)
     
 
     this.anims.create({
