@@ -7,7 +7,7 @@ export default class cena1 extends Phaser.Scene {
   }
 
   /* sprites */
-  preload () {
+  preload() {
     this.load.tilemapTiledJSON('tilemap-cena1', '../assets/Arte/cena1.json')
 
     this.load.image('imagem-cena1', '../assets/Arte/cena1.png')
@@ -34,7 +34,7 @@ export default class cena1 extends Phaser.Scene {
   }
 
   /* animações */
-  create () {
+  create() {
     this.tilemapcena1 = this.make.tilemap({
       key: 'tilemap-cena1'
     })
@@ -50,9 +50,13 @@ export default class cena1 extends Phaser.Scene {
     this.personagem = this.physics.add.sprite(400, 200, 'gugu')
     
     this.personagem.setCollideWorldBounds(true)
+    
     this.cameras.main.startFollow(this.personagem, false, 1, 0)
     this.physics.world.setBounds(0, 0, 1120, 450)
-    this.cameras.main.setBounds(0, 0, 1120, 450)
+    this.cameras.main.setBounds(0, -150, 1120, 450)
+    this.cameras.main.setZoom(this.cameras.main.zoom + 0.5)
+    
+    
     
 
     this.anims.create({
@@ -113,7 +117,7 @@ export default class cena1 extends Phaser.Scene {
         this.personagem.anims.play('gugu-parado-direita')
         this.personagem.setVelocityX(0)
       })
-    .setScrollFactor(0, 0)
+      .setScrollFactor(0, 0)
 
     this.esquerda = this.add.sprite(50, 400, 'esquerda', 0)
       .setInteractive()
@@ -142,19 +146,19 @@ export default class cena1 extends Phaser.Scene {
           this.personagem.setVelocityY(-100);
         }
       })
-  .on('pointerup', () => {
-    // Verifica se o personagem está colidindo com o "layerchaocortina" na parte de baixo
-    const bottomCheckPoint = this.personagem.y + this.personagem.displayHeight / 2 + 1; // Ponto abaixo do personagem
-    const isCollidingWithLayer = this.layerchaocortina.getTileAtWorldXY(this.personagem.x, bottomCheckPoint);
+      .on('pointerup', () => {
+        // Verifica se o personagem está colidindo com o "layerchaocortina" na parte de baixo
+        const bottomCheckPoint = this.personagem.y + this.personagem.displayHeight / 2 + 1; // Ponto abaixo do personagem
+        const isCollidingWithLayer = this.layerchaocortina.getTileAtWorldXY(this.personagem.x, bottomCheckPoint);
 
-    if (isCollidingWithLayer) {
-      this.cima.setFrame(0);
-    } else {
-      // Se não estiver colidindo, defina o frame como 0
-      this.cima.setFrame(0);
-    }
-  })
-  .setScrollFactor(0, 0);
+        if (isCollidingWithLayer) {
+          this.cima.setFrame(0);
+        } else {
+          // Se não estiver colidindo, defina o frame como 0
+          this.cima.setFrame(0);
+        }
+      })
+      .setScrollFactor(0, 0);
     
     /*limites*/
 
@@ -165,5 +169,15 @@ export default class cena1 extends Phaser.Scene {
     this.physics.add.collider(this.personagem, this.layerchaocortina)
   }
 
-  update () { }
+  update() {
+    // Defina a posição Y de destino da câmera para ser a posição Y do personagem menos 80 pixels
+    const cameraY = this.personagem.y - 80;
+
+    // Suavize o movimento da câmera usando o método Phaser.Math.Linear
+    const smoothFactor = 0.1; // Ajuste esse valor para controlar a suavidade
+    const newCameraY = Phaser.Math.Linear(this.cameras.main.scrollY, cameraY, smoothFactor);
+
+    // Defina a posição Y da câmera
+    this.cameras.main.scrollY = newCameraY;
+  }
 }
