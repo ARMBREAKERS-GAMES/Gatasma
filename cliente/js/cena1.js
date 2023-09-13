@@ -46,7 +46,6 @@ export default class cena1 extends Phaser.Scene {
     this.layerchaocortina = this.tilemapcena1.createLayer('chao-cortina', [this.tilesetcena1])
     this.layercortina2 = this.tilemapcena1.createLayer('cortina', [this.tilesetcena1])
 
-    this.add.image(400, 225, 'Fundo')
     this.personagem = this.physics.add.sprite(400, 200, 'gugu')
     
     this.personagem.setCollideWorldBounds(true)
