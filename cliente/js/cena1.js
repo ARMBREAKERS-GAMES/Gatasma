@@ -12,6 +12,8 @@ export default class cena1 extends Phaser.Scene {
 
     this.load.image('imagem-cena1', '../assets/Arte/cena1.png')
 
+    this.load.image('pilarsu', '../assets/pilarsu.png')
+
     this.load.spritesheet('gugu', '../assets/gugu.png', {
       frameWidth: 64,
       frameHeight: 64
@@ -55,7 +57,7 @@ export default class cena1 extends Phaser.Scene {
     this.cameras.main.setBounds(0, -150, 1120, 450)
     this.cameras.main.setZoom(this.cameras.main.zoom + 0.5)
     
-    
+    this.pilar = this.add.sprite(641, 128, 'pilarsu', 0)
     
 
     this.anims.create({
