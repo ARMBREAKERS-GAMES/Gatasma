@@ -15,11 +15,13 @@ export default class abertura extends Phaser.Scene {
       this.add.text(50, this.game.config.height * 0.85, '[iniciar]')
         .setInteractive()
         .on('pointerdown', () => {
+          this.musicaSound.stop('musica_inicio')
           this.game.scene.stop('abertura')
           this.game.scene.start('cena1')
         })
       
-      this.musicaSound = this.sound.add('musica_inicio');
+      this.musicaSound = this.sound.add('musica_inicio')
+      this.musicaSound.play()
 
       /*Abertura*/
 
@@ -36,6 +38,6 @@ export default class abertura extends Phaser.Scene {
       this.abertura.anims.play('abertura');
       this.musicaSound.play();
     }
-  }
+}
 
 

@@ -3,6 +3,7 @@ export default class cena1 extends Phaser.Scene {
     super('cena1')
 
     this.velocidade = 200
+    
   }
 
   /* sprites */
