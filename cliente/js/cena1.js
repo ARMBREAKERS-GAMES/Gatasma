@@ -105,7 +105,7 @@ export default class cena1 extends Phaser.Scene {
     })
 
     /* botões */
-    this.direita = this.add.sprite(150, 400, 'direita', 0)
+    this.direita = this.add.sprite(266, 350, 'direita', 0)
       .setInteractive()
       .on('pointerdown', () => {
         this.direita.setFrame(1)
@@ -119,7 +119,7 @@ export default class cena1 extends Phaser.Scene {
       })
       .setScrollFactor(0, 0)
 
-    this.esquerda = this.add.sprite(50, 400, 'esquerda', 0)
+    this.esquerda = this.add.sprite(170, 350, 'esquerda', 0)
       .setInteractive()
       .on('pointerdown', () => {
         this.esquerda.setFrame(1)
@@ -133,7 +133,7 @@ export default class cena1 extends Phaser.Scene {
       })
       .setScrollFactor(0, 0)
     
-    this.cima = this.add.sprite(700, 400, 'cima', 0)
+    this.cima = this.add.sprite(630, 350, 'cima', 0)
       .setInteractive()
       .on('pointerdown', () => {
         this.cima.setFrame(1);
