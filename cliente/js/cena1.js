@@ -49,6 +49,16 @@ export default class cena1 extends Phaser.Scene {
     this.layercortina2 = this.tilemapcena1.createLayer('cortina', [this.tilesetcena1])
 
     this.personagem = this.physics.add.sprite(0, 200, 'gugu')
+    const hitboxWidth = 17;
+    const hitboxHeight = 56;
+
+    // Define o deslocamento da hitbox para centralizá-la corretamente
+    const offsetX = (this.personagem.width - hitboxWidth) / 2;
+    const offsetY = this.personagem.height - hitboxHeight;
+
+    // Configura a hitbox do personagem
+    this.personagem.setSize(hitboxWidth, hitboxHeight, true);
+    this.personagem.setOffset(offsetX, offsetY);
     
     this.personagem.setCollideWorldBounds(true)
     
