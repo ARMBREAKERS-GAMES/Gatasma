@@ -48,7 +48,7 @@ export default class cena1 extends Phaser.Scene {
     this.layerchaocortina = this.tilemapcena1.createLayer('chao-cortina', [this.tilesetcena1])
     this.layercortina2 = this.tilemapcena1.createLayer('cortina', [this.tilesetcena1])
 
-    this.personagem = this.physics.add.sprite(400, 200, 'gugu')
+    this.personagem = this.physics.add.sprite(0, 200, 'gugu')
     
     this.personagem.setCollideWorldBounds(true)
     
@@ -57,7 +57,7 @@ export default class cena1 extends Phaser.Scene {
     this.cameras.main.setBounds(0, -150, 1120, 450)
     this.cameras.main.setZoom(this.cameras.main.zoom + 0.5)
     
-    this.pilar = this.add.sprite(641, 128, 'pilarsu', 0)
+    this.pilar = this.add.sprite(641, 152, 'pilarsu', 0)
     
 
     this.anims.create({
@@ -180,5 +180,21 @@ export default class cena1 extends Phaser.Scene {
 
     // Defina a posição Y da câmera
     this.cameras.main.scrollY = newCameraY;
+    
+    // Verifique se a câmera avançou 1 unidade no eixo X
+    if (this.cameras.main.scrollX > this.previousCameraX) {
+      // A câmera avançou no eixo X, então o pilarsu deve retroceder 1 unidade no eixo X
+      this.pilar.x -= 0.4;
+    }
+    if (this.cameras.main.scrollX < this.previousCameraX) {
+      // A câmera avançou no eixo X, então o pilarsu deve retroceder 1 unidade no eixo X
+      this.pilar.x -= -0.4;
+    }
+
+    // Armazene a posição da câmera atual para comparar na próxima atualização
+    this.previousCameraX = this.cameras.main.scrollX;
+
+   
   }
-}
+  }
+
