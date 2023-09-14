@@ -9,10 +9,22 @@ export default class Abertura extends Phaser.Scene {
       frameHeight: 450,
     });
 
+    this.load.script(
+      'webfont',
+      'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js'
+    )
+
     this.load.audio('musicaInicio', 'assets/ABERTURALULLABY.mp3');
   }
 
   create() {
+    WebFont.load({
+      custom: {
+        families: ['PressStart2P'],
+        urls: ['../main.css']
+      }
+    });
+
     this.aberturaSprite = this.add.sprite(400, 225, 'aberturaSprite');
 
     this.add.text(50, this.game.config.height * 0.85, '[cutscene]')
