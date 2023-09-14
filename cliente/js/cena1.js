@@ -9,10 +9,11 @@ export default class Cena1 extends Phaser.Scene {
     this.load.tilemapTiledJSON('tilemap-cena1', 'assets/Arte/cena1.json');
     this.load.image('imagem-cena1', 'assets/Arte/cena1.png');
     this.load.image('pilarsu', 'assets/pilarsu.png');
+    
     this.load.spritesheet('gugu', 'assets/gugu.png', {
       frameWidth: 64,
       frameHeight: 64,
-    });
+    })
     this.load.spritesheet('direita', 'assets/botao.png', {
       frameWidth: 64,
       frameHeight: 64,
@@ -117,12 +118,12 @@ export default class Cena1 extends Phaser.Scene {
     this.previousCameraX = this.cameras.main.scrollX;
   }
 
-  criarBotao(nome, x) {
-    this[nome] = this.add.sprite(x, 350, nome, 0)
+  criarBotao(botao, x) {
+    this[botao] = this.add.sprite(x, 350, botao, 0)
       .setInteractive()
       .on('pointerdown', () => {
-        this[nome].setFrame(1);
-        if (nome === 'cima') {
+        this[botao].setFrame(1);
+        if (botao === 'cima') {
           const bottomCheckPoint = this.personagem.y + this.personagem.displayHeight / 2 + 1;
           const isCollidingWithLayer = this.layerchaocortina.getTileAtWorldXY(this.personagem.x, bottomCheckPoint);
 
@@ -130,14 +131,14 @@ export default class Cena1 extends Phaser.Scene {
             this.personagem.setVelocityY(-100);
           }
         } else {
-          this.personagem.anims.play(`gugu-${nome}`, true);
-          this.personagem.setVelocityX((nome === 'direita') ? 100 : -100);
+          this.personagem.anims.play(`gugu-${botao}`, true);
+          this.personagem.setVelocityX((botao === 'direita') ? 100 : -100);
         }
       })
       .on('pointerup', () => {
-        this[nome].setFrame(0);
-        if (nome !== 'cima') {
-          this.personagem.anims.play(`gugu-parado-${nome}`);
+        this[botao].setFrame(0);
+        if (botao !== 'cima') {
+          this.personagem.anims.play(`gugu-parado-${botao}`);
           this.personagem.setVelocityX(0);
         }
       })
