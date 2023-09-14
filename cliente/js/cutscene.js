@@ -38,7 +38,7 @@ export default class Cutscene extends Phaser.Scene {
     // Animação de Fade In para 'logo'
     fadeIn(logoImage, 1000, () => {
       // Após o Fade In, aguarde 5 segundos antes de fazer o Fade Out
-      this.time.delayedCall(5000, () => {
+      this.time.delayedCall(2000, () => {
         // Animação de Fade Out para 'logo'
         fadeOut(logoImage, 1000, () => {
           // Animação de Fade In para 'submundo'
