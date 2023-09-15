@@ -11,16 +11,6 @@ export default class Cutscene extends Phaser.Scene {
   }
 
   create() {
-    const textTest = this.add.text(
-      400,
-      375,
-      'esse texto não existe',
-      {
-        fontFamily: 'PressStart2P',
-        fontSize: '35px',
-        fill: 'white'
-      }).setOrigin(0.5, 0.5)
-    
     // Adicione as imagens e defina a visibilidade inicial
     const submundoImage = this.add.image(400, 225, 'submundo').setAlpha(0);
     const frascoImage = this.add.image(400, 225, 'frasco').setAlpha(0);
