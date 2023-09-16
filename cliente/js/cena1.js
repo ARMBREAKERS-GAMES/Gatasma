@@ -80,6 +80,20 @@ export default class Cena1 extends Phaser.Scene {
 
     // Crie o pilar
     this.pilar = this.add.sprite(641, 152, 'pilarsu', 0);
+   
+    //sombra
+
+    // gameObject.preFX.setPadding(padding);
+    /*var effect = this.personagem.preFX.addShadow(0, 0, 0.1, 6, 0x000000, 1, 1);
+    effect.x = 0;
+    effect.y = 0;
+    effect.decay = 0.1;
+    effect.power = 6;
+    effect.color = 0x000000;
+    effect.samples = 1;
+    effect.intensity = 1;*/
+  
+
 
     // Crie animações para o personagem
     this.anims.create({
