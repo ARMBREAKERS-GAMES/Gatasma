@@ -1,4 +1,4 @@
- //sombra
+  sombra
 
     // gameObject.preFX.setPadding(padding);
     /*var effect = this.personagem.preFX.addShadow(0, 0, 0.1, 6, 0x000000, 1, 1);
@@ -11,7 +11,7 @@
     effect.intensity = 1;*/
   
     // Adicione um efeito de brilho à camada "vitral"
-    /*
+    
     const effect = this.pilar.postFX.addGlow(0xffffff, 4, 0, false); // Cor branca, raio de 4, sem modo de mistura
     effect.color = 0xffffff; // Cor do brilho (branco)
     effect.outerStrength = 4; // Intensidade do brilho externo
@@ -24,4 +24,18 @@
       duration: 3500,
       repeat: -1,
       yoyo: false
-    });*/
+    });
+
+     var effect = this.pilar.preFX.addShine(0.5, 0.5, 3, false);
+    effect.speed = 0.5;
+    effect.lineWidth = 0.5;
+    effect.gradient = 3;
+    effect.reveal = false;
+    this.tweens.add({
+      targets: effect, 
+      outerStrength: 0, 
+      ease: 'Linear',
+      duration: 3500,
+      repeat: -1,
+      yoyo: false,
+    });
