@@ -37,10 +37,9 @@ export default class Cena1 extends Phaser.Scene {
 
     this.layerfundo = this.tilemapcena1.createLayer('fundo', [this.tilesetcena1]);
     this.layervitral = this.tilemapcena1.createLayer('vitral', [this.tilesetcena1]);
-    this.layerpilares = this.tilemapcena1.createLayer('pilares', [this.tilesetcena1]);
     this.layerchaocortina = this.tilemapcena1.createLayer('chao-cortina', [this.tilesetcena1]);
     this.layercortina2 = this.tilemapcena1.createLayer('cortina', [this.tilesetcena1]);
-
+    this.layerpilares = this.tilemapcena1.createLayer('pilares', [this.tilesetcena1]);
     // Crie o personagem
     this.personagem = this.physics.add.sprite(0, 200, 'gugu');
     const hitboxWidth = 17;

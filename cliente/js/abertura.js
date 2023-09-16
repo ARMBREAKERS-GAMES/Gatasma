@@ -7,23 +7,12 @@ export default class Abertura extends Phaser.Scene {
     this.load.spritesheet('aberturaSprite', 'assets/capa.png', {
       frameWidth: 800,
       frameHeight: 450,
-    });
-
-    this.load.script(
-      'webfont',
-      'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js'
-    )
+    })
 
     this.load.audio('musicaInicio', 'assets/ABERTURALULLABY.mp3');
   }
 
   create() {
-    WebFont.load({
-      custom: {
-        families: ['PressStart2P'],
-        urls: ['../main.css']
-      }
-    });
 
     this.aberturaSprite = this.add.sprite(400, 225, 'aberturaSprite');
 
