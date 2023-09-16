@@ -5,6 +5,11 @@ export default class Cena1 extends Phaser.Scene {
   }
 
   preload() {
+    var url;
+
+    url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexpixelationpipelineplugin.min.js';
+    this.load.plugin('rexpixelationpipelineplugin', url, true);      
+
     // Carregue os recursos
     this.load.tilemapTiledJSON('tilemap-cena1', 'assets/Arte/cena1.json');
     this.load.image('imagem-cena1', 'assets/Arte/cena1.png');
@@ -55,6 +60,23 @@ export default class Cena1 extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, 1120, 450);
     this.cameras.main.setBounds(0, -150, 1120, 450);
     this.cameras.main.setZoom(this.cameras.main.zoom + 0.5);
+    var postFxPlugin = this.plugins.get('rexpixelationpipelineplugin');
+    this.cameraFilter = postFxPlugin.add(this.cameras.main);
+
+    // Defina o nível de pixelização inicial aqui (valores maiores significam mais pixelização)
+    this.cameraFilter.pixelWidth = 40; // Por exemplo, defina como 10
+    this.cameraFilter.pixelHeight = 40; // Por exemplo, defina como 10
+
+    // Adicione um tweens para animar a pixelização
+    this.tweens.add({
+      targets: this.cameraFilter,
+      pixelWidth: 0, // Defina a pixelização para o mínimo (sem pixelização)
+      pixelHeight: 0,
+      ease: 'Linear',
+      duration: 3500,
+      repeat: 0,
+      yoyo: false
+    });
 
     // Crie o pilar
     this.pilar = this.add.sprite(641, 152, 'pilarsu', 0);
@@ -158,5 +180,8 @@ export default class Cena1 extends Phaser.Scene {
     }
 
     this.previousCameraX = this.cameras.main.scrollX;
+  
+   
+    }
   }
-}
+
