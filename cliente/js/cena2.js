@@ -7,6 +7,10 @@ export default class Cena1 extends Phaser.Scene {
     this.load.tilemapTiledJSON('tilemap-cena2', 'assets/fase2/cena2.json');
     this.load.image('imagem-cena1', 'assets/fase2/cena2.png');
     this.load.image('sombra', 'assets/fase2/sombra.png');
+    this.load.spritesheet('vapo', 'assets/fase2/vapo.png', {
+      frameWidth: 800,
+      frameHeight: 448,
+    });
 
 
     this.load.spritesheet('gugu', 'assets/gugu.png', {
@@ -24,11 +28,6 @@ export default class Cena1 extends Phaser.Scene {
     this.load.spritesheet('cima', 'assets/botao.png', {
       frameWidth: 64,
       frameHeight: 64,
-    });
-
-    this.load.spritesheet('vapo', 'assets/fase2/vapo.png', {
-      frameWidth: 800,
-      frameHeight: 448,
     });
     
   }
@@ -55,6 +54,7 @@ export default class Cena1 extends Phaser.Scene {
 
     // Câmera segue o personagem "gugu"
     this.cameras.main.startFollow(this.personagem, true, 0.1, 0.1); // Os últimos dois valores controlam a suavização
+  
 
     // Câmera segue o personagem "gugu"
     this.cameras.main.startFollow(this.personagem, false, 1, 0);
@@ -127,7 +127,7 @@ export default class Cena1 extends Phaser.Scene {
         this[botao].setFrame(1);
         if (botao === 'cima') {
           const bottomCheckPoint = this.personagem.y + this.personagem.displayHeight / 2 + 1;
-          const isCollidingWithLayer = this.layerchaocortina.getTileAtWorldXY(this.personagem.x, bottomCheckPoint);
+          const isCollidingWithLayer = this.layerblocos.getTileAtWorldXY(this.personagem.x, bottomCheckPoint);
 
           if (isCollidingWithLayer) {
             this.personagem.setVelocityY(-100);
@@ -137,6 +137,15 @@ export default class Cena1 extends Phaser.Scene {
           this.personagem.setVelocityX((botao === 'direita') ? 100 : -100);
         }
       })
+      .on('pointerup', () => {
+        this[botao].setFrame(0);
+        if (botao !== 'cima') {
+          this.personagem.anims.play(`gugu-parado-${botao}`);
+          this.personagem.setVelocityX(0);
+        }
+      })
+      .setScrollFactor(0, 0);
+  
     
     // Configurar colisões
     this.layerblocos.setCollisionByProperty({ collides: true });
@@ -145,10 +154,15 @@ export default class Cena1 extends Phaser.Scene {
     //fundo
     this.anims.create({
       key: 'vapo',
-      frames: this.anims.generateFrameNumbers('vapo', { start: 0, end: 7 }),
-      frameRate: 12,
+      frames: this.anims.generateFrameNumbers('vapo', { // Use 'vapo' em vez de 'vaposprite'
+        start: 0,
+        end: 4,
+      }),
+      frameRate: 3,
       repeat: -1,
     });
-    this.personagem.anims.play('vapo');
+
+    this.vaposprite = this.add.sprite(400, 222, 'vapo', 0); // Certifique-se de definir a posição (x, y) desejada
+    this.vaposprite.anims.play('vapo');
   }
-}
+  }
