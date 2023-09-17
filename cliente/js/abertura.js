@@ -23,6 +23,13 @@ export default class Abertura extends Phaser.Scene {
         this.scene.stop('abertura');
         this.scene.start('cutscene');
       });
+    this.add.text(400, this.game.config.height * 0.85, '[cena2]')
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.musicaSound.stop();
+        this.scene.stop('abertura');
+        this.scene.start('cena2');
+      });
 
     this.musicaSound = this.sound.add('musicaInicio');
     this.musicaSound.play();
