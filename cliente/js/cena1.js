@@ -31,6 +31,7 @@ export default class Cena1 extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 64,
     });
+    this.load.audio('passo', 'assets/passo.mp3');
   }
 
   create() {
@@ -160,6 +161,13 @@ export default class Cena1 extends Phaser.Scene {
           this.personagem.anims.play(`gugu-${botao}`, true);
           this.personagem.setVelocityX((botao === 'direita') ? 100 : -100);
         }
+        this.passoSound = this.sound.add('passo');  
+        this.passoSound.setLoop(true);
+        this.passoSound.play();
+        this.passoSound.setVolume(0.1)
+        this.passoSound.setRate(0.8)
+        
+
       })
       .on('pointerup', () => {
         this[botao].setFrame(0);
@@ -167,8 +175,10 @@ export default class Cena1 extends Phaser.Scene {
           this.personagem.anims.play(`gugu-parado-${botao}`);
           this.personagem.setVelocityX(0);
         }
+        this.passoSound.stop();
       })
       .setScrollFactor(0, 0);
+    
   }
 
   update() {
