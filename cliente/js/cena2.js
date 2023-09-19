@@ -10,17 +10,18 @@ export default class Cena2 extends Phaser.Scene {
     this.load.audio('musica2', 'assets/fase2/musica2.mp3');
     this.load.image('porta2', 'assets/fase2/porta2.png')
     this.load.image('portasobe2', 'assets/fase2/portasobe2.png')
+    this.load.image('botaoi', 'assets'/'botao.png')
     this.load.spritesheet('botaoc2', 'assets/fase2/botaoc2.png', {
-      frameWidth: 64,
-      frameHeight: 64,
+      frameWidth: 32,
+      frameHeight: 32,
     })
     this.load.spritesheet('tocha', 'assets/fase2/tocha.png', {
-      frameWidth: 64,
-      frameHeight: 64,
+      frameWidth: 32,
+      frameHeight: 32,
     })
     this.load.spritesheet('alavanca2', 'assets/fase2/alavanca2.png', {
-      frameWidth: 64,
-      frameHeight: 64,
+      frameWidth: 32,
+      frameHeight: 32,
     })
     this.load.spritesheet('vapo', 'assets/fase2/vapo.png', {
       frameWidth: 800,
@@ -46,27 +47,6 @@ export default class Cena2 extends Phaser.Scene {
   }
 
   create() {
-
-    this.botaoc2 = this.add.sprite('botaoc2')
-    
-
-    this.anims.create({
-      key: 'botaoc2cima',
-      frames: this.anims.generateFrameNumbers('botaoc2', {
-        start: 0,
-        end: 1,
-      }),
-      frameRate: 3,
-    });
-    this.anims.create({
-      key: 'botaoc2baixo',
-      frames: this.anims.generateFrameNumbers('botaoc2', {
-        start: 1,
-        end: 0,
-      }),
-      frameRate: 3,
-    });
-
     this.musicaSound = this.sound.add('musica2');
     this.musicaSound.setLoop(true);
     this.musicaSound.play();
@@ -98,10 +78,11 @@ export default class Cena2 extends Phaser.Scene {
    
     this.personagem = this.physics.add.sprite(0, 380, 'gugu');
     const hitboxWidth = 17;
-    const hitboxHeight = 62;
-    const offsetX = (this.personagem.width - hitboxWidth) / 2;
-    const offsetY = this.personagem.height - hitboxHeight;
+    const hitboxHeight = 58;
+    const offsetX = 24
+    const offsetY = 6
     this.personagem.setSize(hitboxWidth, hitboxHeight, true);
+    this.personagem.body.offset.set(offsetX, offsetY)
     this.personagem.setCollideWorldBounds(true);
 
     this.cameras.main.startFollow(this.personagem, false, 1, 0);
@@ -149,10 +130,24 @@ export default class Cena2 extends Phaser.Scene {
     this.criarBotao('direita', 166);
     this.criarBotao('esquerda', 70);
     this.criarBotao('cima', 730);
+    
+
+    this.botaoc2 = this.add
+      .sprite(720, 400, 'botaoc2', 0)
+    this.botaoc2Collider = this.add.rectangle(732, 412, 1, 8, 0x000000, 0); // O retângulo invisível que corresponde ao botaoc2
+    this.physics.world.enable(this.botaoc2Collider); // Habilita a física para o retângulo
+    this.botaoc2Collider.body.setAllowGravity(false); // Não permita que a gravidade afete o retângulo
+
+    
+    this.alavanca2 = this.add
+      .sprite(48, 192, 'alavanca2', 0)
+    this.alavanca2Collider = this.add.rectangle(48, 192, 24, 24, 0x000000, 0); // O retângulo invisível que corresponde ao alavanca2
+    this.physics.world.enable(this.alavanca2Collider); // Habilita a física para o retângulo
+    this.alavanca2Collider.body.setAllowGravity(false); // Não permita que a gravidade afete o retângulo
 
     // Configurar colisões
    
-    this.physics.add.collider(this.personagem, this.layerblocos);
+    this.physics.add.collider(this.personagem, this.layerblocos,);
 
     
   }
@@ -181,5 +176,23 @@ export default class Cena2 extends Phaser.Scene {
         }
       })
       .setScrollFactor(0, 0);
+  }
+
+  update() {
+    // Verifica a sobreposição entre o personagem e o botaoc2Collider
+    const isOverlapping = Phaser.Geom.Intersects.RectangleToRectangle(
+      this.personagem.getBounds(),
+      this.botaoc2Collider.getBounds()
+    );
+
+    if (isOverlapping) {
+      // Quando houver sobreposição, mude o sprite do botaoc2 para 1
+      this.botaoc2.setFrame(1);
+    } else {
+      // Caso contrário, mantenha o sprite do botaoc2 como 0
+      this.botaoc2.setFrame(0);
+      
+      
+    }
   }
 }
