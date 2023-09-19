@@ -8,6 +8,20 @@ export default class Cena2 extends Phaser.Scene {
     this.load.image('imagemcena2', 'assets/fase2/imagemcena2.png');
     this.load.image('sombra', 'assets/fase2/sombra.png');
     this.load.audio('musica2', 'assets/fase2/musica2.mp3');
+    this.load.image('porta2', 'assets/fase2/porta2.png')
+    this.load.image('portasobe2', 'assets/fase2/portasobe2.png')
+    this.load.spritesheet('botaoc2', 'assets/fase2/botaoc2.png', {
+      frameWidth: 64,
+      frameHeight: 64,
+    })
+    this.load.spritesheet('tocha', 'assets/fase2/tocha.png', {
+      frameWidth: 64,
+      frameHeight: 64,
+    })
+    this.load.spritesheet('alavanca2', 'assets/fase2/alavanca2.png', {
+      frameWidth: 64,
+      frameHeight: 64,
+    })
     this.load.spritesheet('vapo', 'assets/fase2/vapo.png', {
       frameWidth: 800,
       frameHeight: 448
@@ -32,9 +46,31 @@ export default class Cena2 extends Phaser.Scene {
   }
 
   create() {
+
+    this.botaoc2 = this.add.sprite('botaoc2')
+    
+
+    this.anims.create({
+      key: 'botaoc2cima',
+      frames: this.anims.generateFrameNumbers('botaoc2', {
+        start: 0,
+        end: 1,
+      }),
+      frameRate: 3,
+    });
+    this.anims.create({
+      key: 'botaoc2baixo',
+      frames: this.anims.generateFrameNumbers('botaoc2', {
+        start: 1,
+        end: 0,
+      }),
+      frameRate: 3,
+    });
+
     this.musicaSound = this.sound.add('musica2');
     this.musicaSound.setLoop(true);
     this.musicaSound.play();
+
 
     this.vapo = this.add.sprite(400, 225, 'vapo');
     this.anims.create({
