@@ -136,6 +136,8 @@ export default class Cena1 extends Phaser.Scene {
     this.layerchaocortina.setCollisionByProperty({ collides: true });
     this.physics.add.collider(this.personagem, this.layerchaocortina);
 
+    
+
     // Armazenar a posição anterior da câmera
     this.previousCameraX = this.cameras.main.scrollX;
   }
