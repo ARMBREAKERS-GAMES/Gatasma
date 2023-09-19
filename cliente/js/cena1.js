@@ -158,7 +158,7 @@ export default class Cena1 extends Phaser.Scene {
           }
         } else {
           this.personagem.anims.play(`gugu-${botao}`, true);
-          this.personagem.setVelocityX((botao === 'direita') ? 500 : -500);
+          this.personagem.setVelocityX((botao === 'direita') ? 100 : -100);
         }
       })
       .on('pointerup', () => {
