@@ -28,6 +28,7 @@ export default class Cena2 extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 64,
     });
+    
   }
 
   create() {
