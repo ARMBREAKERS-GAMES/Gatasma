@@ -8,13 +8,13 @@ export default class Cena1 extends Phaser.Scene {
     var url;
 
     url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexpixelationpipelineplugin.min.js';
-    this.load.plugin('rexpixelationpipelineplugin', url, true);      
+    this.load.plugin('rexpixelationpipelineplugin', url, true);
 
     // Carregue os recursos
     this.load.tilemapTiledJSON('tilemap-cena1', 'assets/Arte/cena1.json');
     this.load.image('imagem-cena1', 'assets/Arte/cena1.png');
     this.load.image('pilarsu', 'assets/pilarsu.png');
-    
+
     this.load.spritesheet('gugu', 'assets/gugu.png', {
       frameWidth: 64,
       frameHeight: 64,
@@ -60,28 +60,28 @@ export default class Cena1 extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, 1120, 450);
     this.cameras.main.setBounds(0, -150, 1120, 450);
     this.cameras.main.setZoom(this.cameras.main.zoom + 0.5);
-    var postFxPlugin = this.plugins.get('rexpixelationpipelineplugin');
-    this.cameraFilter = postFxPlugin.add(this.cameras.main);
+    //var postFxPlugin = this.plugins.get('rexpixelationpipelineplugin');
+    //this.cameraFilter = postFxPlugin.add(this.cameras.main);
 
     // Defina o nível de pixelização inicial aqui (valores maiores significam mais pixelização)
-    this.cameraFilter.pixelWidth = 40; // Por exemplo, defina como 10
-    this.cameraFilter.pixelHeight = 40; // Por exemplo, defina como 10
+    // this.cameraFilter.pixelWidth = 40; // Por exemplo, defina como 10
+    // this.cameraFilter.pixelHeight = 40; // Por exemplo, defina como 10
 
     // Adicione um tweens para animar a pixelização
-    this.tweens.add({
-      targets: this.cameraFilter,
-      pixelWidth: 0, // Defina a pixelização para o mínimo (sem pixelização)
-      pixelHeight: 0,
-      ease: 'Linear',
-      duration: 3500,
-      repeat: 0,
-      yoyo: false
-    });
+    /* this.tweens.add({
+       targets: this.cameraFilter,
+       pixelWidth: 0, // Defina a pixelização para o mínimo (sem pixelização)
+       pixelHeight: 0,
+       ease: 'Linear',
+       duration: 3500,
+       repeat: 0,
+       yoyo: false
+     });*/
 
     // Crie o pilar
     this.pilar = this.add.sprite(641, 152, 'pilarsu', 0)
-  
-    
+
+
     // Crie animações para o personagem
     this.anims.create({
       key: 'gugu-parado-direita',
@@ -136,10 +136,12 @@ export default class Cena1 extends Phaser.Scene {
     this.layerchaocortina.setCollisionByProperty({ collides: true });
     this.physics.add.collider(this.personagem, this.layerchaocortina);
 
-    
+
 
     // Armazenar a posição anterior da câmera
     this.previousCameraX = this.cameras.main.scrollX;
+
+    this.textShown = false
   }
 
   criarBotao(botao, x) {
@@ -156,7 +158,7 @@ export default class Cena1 extends Phaser.Scene {
           }
         } else {
           this.personagem.anims.play(`gugu-${botao}`, true);
-          this.personagem.setVelocityX((botao === 'direita') ? 100 : -100);
+          this.personagem.setVelocityX((botao === 'direita') ? 500 : -500);
         }
       })
       .on('pointerup', () => {
@@ -183,8 +185,23 @@ export default class Cena1 extends Phaser.Scene {
     }
 
     this.previousCameraX = this.cameras.main.scrollX;
-  
-   
+    const limiteDireitoTela = 1020; // Altere para o valor apropriado
+    if ((this.personagem.x >= limiteDireitoTela) && (this.textShown == false)) {
+      this.textShown = true
+      this.add.text(980, 10, '[próxima fase]')
+        .setInteractive()
+        .on('pointerdown', () => {
+          this.scene.stop('cena1');
+          this.scene.start('cena2');
+        });
+
+
+      // Destrói a cena1 e inicia a cena2
+      //this.scene.stop('cena1');
+      //this.scene.start('cena2');
     }
+
+
   }
+}
 
