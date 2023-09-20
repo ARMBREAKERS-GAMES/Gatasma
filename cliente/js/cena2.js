@@ -58,7 +58,7 @@ export default class Cena2 extends Phaser.Scene {
   }
 
   create() {
-    this.scene.input.addPointer(3);
+    this.input.addPointer(3)
     
     this.musicaSound = this.sound.add('musica2');
     this.musicaSound.setLoop(true);
