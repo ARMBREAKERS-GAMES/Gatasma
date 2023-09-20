@@ -10,7 +10,10 @@ export default class Cena2 extends Phaser.Scene {
     this.load.audio('musica2', 'assets/fase2/musica2.mp3');
     this.load.image('porta2', 'assets/fase2/porta2.png')
     this.load.image('portasobe2', 'assets/fase2/portasobe2.png')
-    this.load.image('botaoi', 'assets'/'botao.png')
+    this.load.spritesheet('botaoa', 'assets/fase2/botaoa.png', {
+      frameWidth: 64,
+      frameHeight: 64,
+    })
     this.load.spritesheet('botaoc2', 'assets/fase2/botaoc2.png', {
       frameWidth: 32,
       frameHeight: 32,
@@ -145,6 +148,28 @@ export default class Cena2 extends Phaser.Scene {
     this.physics.world.enable(this.alavanca2Collider); // Habilita a física para o retângulo
     this.alavanca2Collider.body.setAllowGravity(false); // Não permita que a gravidade afete o retângulo
 
+    //fazeralavancafuncionar
+    this.botaoa = this.add.sprite(634, 415, 'botaoa')
+      .setInteractive()
+      .on('pointerdown', () => {
+       const isCollidingWithAlavanca2 = Phaser.Geom.Intersects.RectangleToRectangle(
+      this.personagem.getBounds(),
+      this.alavanca2Collider.getBounds()
+    );
+
+    if (isCollidingWithAlavanca2) {
+      // Se estiver colidindo com a alavanca2, defina o frame da alavanca2 para 2
+      this.alavanca2.setFrame(2);
+    }
+
+    // Defina o frame do botaoa para 1
+    this.botaoa.setFrame(1);
+  })
+  .on('pointerup', () => {
+    // Defina o frame do botaoa de volta para 0
+    this.botaoa.setFrame(0);
+  })
+  .setScrollFactor(0, 0);
     // Configurar colisões
    
     this.physics.add.collider(this.personagem, this.layerblocos,);
@@ -193,6 +218,28 @@ export default class Cena2 extends Phaser.Scene {
       this.botaoc2.setFrame(0);
       
       
+    }
+    const isOverlappingalavanca = Phaser.Geom.Intersects.RectangleToRectangle(
+      this.personagem.getBounds(),
+      this.alavancaCollider.getBounds()
+    );
+
+    if (isOverlappingalavanca) {
+      // Quando houver sobreposição, mude o sprite do alavanca para 1
+      var effect = this.pilar.preFX.addShine(0.5, 0.5, 3, false);
+      effect.speed = 0.5;
+      effect.lineWidth = 0.5;
+      effect.gradient = 3;
+      effect.reveal = false;
+      this.tweens.add({
+        targets: effect,
+        outerStrength: 0,
+        ease: 'Linear',
+        duration: 3500,
+        repeat: -1,
+        yoyo: false,
+      });
+
     }
   }
 }
