@@ -74,6 +74,9 @@ export default class Cena2 extends Phaser.Scene {
     this.portasobe2.body.setAllowGravity(false);
     this.portasobe2.setImmovable(true);
     
+    this.porta2 = this.physics.add.image(770, 234, 'porta2').setScale(1.5)
+    this.porta2.body.setAllowGravity(false);
+    this.porta2.setImmovable(true);
   
   
 
