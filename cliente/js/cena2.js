@@ -69,7 +69,14 @@ export default class Cena2 extends Phaser.Scene {
     this.tilemapcena2 = this.make.tilemap({
       key: 'cena2'
     });
- 
+   
+    this.portasobe2 = this.physics.add.image(176, 158, 'portasobe2');
+    this.portasobe2.body.setAllowGravity(false);
+    this.portasobe2.setImmovable(true);
+    
+  
+  
+
     this.tilesetcena2 = this.tilemapcena2.addTilesetImage('imagemcena2', 'imagemcena2');
     this.tilesetcena2 = this.tilemapcena2.addTilesetImage('sombra', 'sombra');
     this.layersombrap = this.tilemapcena2.createLayer('sombrap', [this.tilesetcena2]);
@@ -77,6 +84,7 @@ export default class Cena2 extends Phaser.Scene {
     this.layersombrac = this.tilemapcena2.createLayer('sombrac', [this.tilesetcena2]);
     this.layerblocos = this.tilemapcena2.createLayer('blocos', [this.tilesetcena2]);
     this.layerblocos.setCollisionByProperty({ collides: true })
+    
 
    
     this.personagem = this.physics.add.sprite(0, 380, 'gugu');
@@ -87,6 +95,8 @@ export default class Cena2 extends Phaser.Scene {
     this.personagem.setSize(hitboxWidth, hitboxHeight, true);
     this.personagem.body.offset.set(offsetX, offsetY)
     this.personagem.setCollideWorldBounds(true);
+
+    
 
     this.cameras.main.startFollow(this.personagem, false, 1, 0);
     this.cameras.main.setBounds(0, 30, 800, 450);
@@ -149,7 +159,7 @@ export default class Cena2 extends Phaser.Scene {
     this.alavanca2Collider.body.setAllowGravity(false); // Não permita que a gravidade afete o retângulo
 
     //fazeralavancafuncionar
-    this.botaoa = this.add.sprite(634, 415, 'botaoa')
+    this.botaoa = this.add.sprite(634, 415, 'botaoa', 0)
       .setInteractive()
       .on('pointerdown', () => {
        const isCollidingWithAlavanca2 = Phaser.Geom.Intersects.RectangleToRectangle(
@@ -160,6 +170,7 @@ export default class Cena2 extends Phaser.Scene {
     if (isCollidingWithAlavanca2) {
       // Se estiver colidindo com a alavanca2, defina o frame da alavanca2 para 2
       this.alavanca2.setFrame(2);
+      
     }
 
     // Defina o frame do botaoa para 1
@@ -168,11 +179,13 @@ export default class Cena2 extends Phaser.Scene {
   .on('pointerup', () => {
     // Defina o frame do botaoa de volta para 0
     this.botaoa.setFrame(0);
+    
   })
   .setScrollFactor(0, 0);
     // Configurar colisões
    
     this.physics.add.collider(this.personagem, this.layerblocos,);
+    this.physics.add.collider(this.personagem, this.portasobe2);
 
     
   }
@@ -186,7 +199,7 @@ export default class Cena2 extends Phaser.Scene {
           const isCollidingWithLayer = this.layerblocos.getTileAtWorldXY(this.personagem.x, bottomCheckPoint);
 
           if (isCollidingWithLayer) {
-            this.personagem.setVelocityY(-200);
+            this.personagem.setVelocityY(-500);
           }
         } else {
           this.personagem.anims.play(`gugu-${botao}`, true);
@@ -201,6 +214,7 @@ export default class Cena2 extends Phaser.Scene {
         }
       })
       .setScrollFactor(0, 0);
+   
   }
 
   update() {
@@ -213,33 +227,31 @@ export default class Cena2 extends Phaser.Scene {
     if (isOverlapping) {
       // Quando houver sobreposição, mude o sprite do botaoc2 para 1
       this.botaoc2.setFrame(1);
+      this.portasobe2.setVelocityY(-30);
+  
     } else {
       // Caso contrário, mantenha o sprite do botaoc2 como 0
       this.botaoc2.setFrame(0);
-      
+      this.portasobe2.setVelocityY(0);
       
     }
     const isOverlappingalavanca = Phaser.Geom.Intersects.RectangleToRectangle(
       this.personagem.getBounds(),
-      this.alavancaCollider.getBounds()
+      this.alavanca2Collider.getBounds()
     );
 
     if (isOverlappingalavanca) {
-      // Quando houver sobreposição, mude o sprite do alavanca para 1
-      var effect = this.pilar.preFX.addShine(0.5, 0.5, 3, false);
-      effect.speed = 0.5;
-      effect.lineWidth = 0.5;
-      effect.gradient = 3;
-      effect.reveal = false;
-      this.tweens.add({
-        targets: effect,
-        outerStrength: 0,
-        ease: 'Linear',
-        duration: 3500,
-        repeat: -1,
-        yoyo: false,
-      });
+      this.botaoa
+        .setAlpha(1)
+    }
+    else {
+      this.botaoa
+        .setAlpha(0)
 
     }
+   
+
+    // ...
   }
-}
+  }
+
