@@ -8,8 +8,11 @@ export default class Cena2 extends Phaser.Scene {
     this.load.image('imagemcena2', 'assets/fase2/imagemcena2.png');
     this.load.image('sombra', 'assets/fase2/sombra.png');
     this.load.audio('musica2', 'assets/fase2/musica2.mp3');
-    this.load.image('porta2', 'assets/fase2/porta2.png')
     this.load.image('portasobe2', 'assets/fase2/portasobe2.png')
+    this.load.spritesheet('porta2', 'assets/fase2/porta2.png', {
+      frameWidth: 80,
+      frameHeight: 144,
+    })
     this.load.spritesheet('botaoa', 'assets/fase2/botaoa.png', {
       frameWidth: 64,
       frameHeight: 64,
@@ -74,9 +77,10 @@ export default class Cena2 extends Phaser.Scene {
     this.portasobe2.body.setAllowGravity(false);
     this.portasobe2.setImmovable(true);
     
-    this.porta2 = this.physics.add.image(770, 234, 'porta2').setScale(1.5)
+    this.porta2 = this.physics.add.sprite(749, 216, 'porta2').setFrame(1)
     this.porta2.body.setAllowGravity(false);
     this.porta2.setImmovable(true);
+   
   
   
 
@@ -173,6 +177,7 @@ export default class Cena2 extends Phaser.Scene {
     if (isCollidingWithAlavanca2) {
       // Se estiver colidindo com a alavanca2, defina o frame da alavanca2 para 2
       this.alavanca2.setFrame(2);
+      this.porta2.setFrame(0)
       
     }
 
