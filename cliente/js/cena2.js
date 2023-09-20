@@ -14,6 +14,8 @@ export default class Cena2 extends Phaser.Scene {
     this.load.image('sombra', 'assets/fase2/sombra.png');
     this.load.audio('musica2', 'assets/fase2/musica2.mp3');
     this.load.image('portasobe2', 'assets/fase2/portasobe2.png')
+    this.load.image('transparente', 'assets/fase2/transparente.png')
+
     this.load.spritesheet('porta2', 'assets/fase2/porta2.png', {
       frameWidth: 80,
       frameHeight: 144,
@@ -81,14 +83,16 @@ export default class Cena2 extends Phaser.Scene {
     });
    
     this.portasobe2 = this.physics.add.image(176, 158, 'portasobe2');
-    this.portasobe2.body.setAllowGravity(false);
+    this.portasobe2.body.setAllowGravity(true);
     this.portasobe2.setImmovable(true);
     
     this.porta2 = this.physics.add.sprite(749, 216, 'porta2').setFrame(1)
     this.porta2.body.setAllowGravity(false);
     this.porta2.setImmovable(true);
    
-  
+    this.transparente = this.physics.add.image(176, 240, 'transparente');
+    this.transparente.body.setAllowGravity(false);
+    this.transparente.setImmovable(true);
   
 
     this.tilesetcena2 = this.tilemapcena2.addTilesetImage('imagemcena2', 'imagemcena2');
@@ -239,14 +243,15 @@ export default class Cena2 extends Phaser.Scene {
   }
 
 
-update() {
+  update() {
+  
   if (this.botoesPressionados.cima) {
     // Ação quando o botão 'cima' estiver pressionado
     const bottomCheckPoint = this.personagem.y + this.personagem.displayHeight / 2 + 1;
     const isCollidingWithLayer = this.layerblocos.getTileAtWorldXY(this.personagem.x, bottomCheckPoint);
 
     if (isCollidingWithLayer) {
-      this.personagem.setVelocityY(-500);
+      this.personagem.setVelocityY(-200);
     }
   }
 
@@ -292,6 +297,34 @@ update() {
     else {
       this.botaoa
         .setAlpha(0)
+      
+
+    }
+    
+    if (isOverlapping) {
+      // Quando houver sobreposição, mude o sprite do botaoc2 para 1
+      this.botaoc2.setFrame(1);
+      this.portasobe2.setVelocityY(-30);
+
+    } else {
+      // Caso contrário, mantenha o sprite do botaoc2 como 0
+      this.botaoc2.setFrame(0);
+      this.portasobe2.setVelocityY(0);
+
+    }
+    // Verifica a sobreposição entre o personagem e o botaoc2Collider
+    const isOverlappingtransparente = Phaser.Geom.Intersects.RectangleToRectangle(
+      this.portasobe2.getBounds(),
+      this.transparente.getBounds()
+    );
+
+    if (isOverlappingtransparente) {
+      // Quando houver sobreposição, mude o sprite do botaoc2 para 1
+      this.portasobe2.body.setAllowGravity(false);
+
+    } else {
+      // Caso contrário, mantenha o sprite do botaoc2 como 0    
+      this.portasobe2.body.setAllowGravity(true);
 
     }
    
