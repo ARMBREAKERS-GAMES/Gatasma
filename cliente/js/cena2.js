@@ -1,6 +1,11 @@
 export default class Cena2 extends Phaser.Scene {
   constructor () {
     super('cena2');
+    this.botoesPressionados = {
+      cima: false,
+      direita: false,
+      esquerda: false,
+    };
   }
 
   preload() {
@@ -53,6 +58,8 @@ export default class Cena2 extends Phaser.Scene {
   }
 
   create() {
+    this.scene.input.addPointer(3);
+    
     this.musicaSound = this.sound.add('musica2');
     this.musicaSound.setLoop(true);
     this.musicaSound.play();
@@ -150,7 +157,9 @@ export default class Cena2 extends Phaser.Scene {
     this.criarBotao('direita', 166);
     this.criarBotao('esquerda', 70);
     this.criarBotao('cima', 730);
-    
+    this.botaoCimaPressionado = false;
+    this.botaoDireitaPressionado = false;
+    this.botaoEsquerdaPressionado = false;
 
     this.botaoc2 = this.add
       .sprite(720, 400, 'botaoc2', 0)
@@ -184,7 +193,8 @@ export default class Cena2 extends Phaser.Scene {
     // Defina o frame do botaoa para 1
     this.botaoa.setFrame(1);
   })
-  .on('pointerup', () => {
+      .on('pointerup', () => {
+        
     // Defina o frame do botaoa de volta para 0
     this.botaoa.setFrame(0);
     
@@ -202,6 +212,8 @@ export default class Cena2 extends Phaser.Scene {
       .setInteractive()
       .on('pointerdown', () => {
         this[botao].setFrame(1);
+        this.botoesPressionados[botao] = true;
+
         if (botao === 'cima') {
           const bottomCheckPoint = this.personagem.y + this.personagem.displayHeight / 2 + 1;
           const isCollidingWithLayer = this.layerblocos.getTileAtWorldXY(this.personagem.x, bottomCheckPoint);
@@ -216,16 +228,41 @@ export default class Cena2 extends Phaser.Scene {
       })
       .on('pointerup', () => {
         this[botao].setFrame(0);
+        this.botoesPressionados[botao] = false;
+
         if (botao !== 'cima') {
           this.personagem.anims.play(`gugu-parado-${botao}`);
           this.personagem.setVelocityX(0);
         }
       })
       .setScrollFactor(0, 0);
-   
   }
 
-  update() {
+
+update() {
+  if (this.botoesPressionados.cima) {
+    // Ação quando o botão 'cima' estiver pressionado
+    const bottomCheckPoint = this.personagem.y + this.personagem.displayHeight / 2 + 1;
+    const isCollidingWithLayer = this.layerblocos.getTileAtWorldXY(this.personagem.x, bottomCheckPoint);
+
+    if (isCollidingWithLayer) {
+      this.personagem.setVelocityY(-500);
+    }
+  }
+
+  if (this.botoesPressionados.direita) {
+    // Ação quando o botão 'direita' estiver pressionado
+    this.personagem.anims.play('gugu-direita', true);
+    this.personagem.setVelocityX(100);
+  }
+
+  if (this.botoesPressionados.esquerda) {
+    // Ação quando o botão 'esquerda' estiver pressionado
+    this.personagem.anims.play('gugu-esquerda', true);
+    this.personagem.setVelocityX(-100);
+  }
+
+
     // Verifica a sobreposição entre o personagem e o botaoc2Collider
     const isOverlapping = Phaser.Geom.Intersects.RectangleToRectangle(
       this.personagem.getBounds(),
