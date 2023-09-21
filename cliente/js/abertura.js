@@ -15,8 +15,16 @@ export default class Abertura extends Phaser.Scene {
   create() {
 
     this.aberturaSprite = this.add.sprite(400, 225, 'aberturaSprite');
-
-    this.add.text(50, this.game.config.height * 0.85, '[cutscene]')
+  
+    this.add.text(50, this.game.config.height * 0.85, '[fase3]')
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.musicaSound.stop();
+        this.scene.stop('abertura');
+        this.scene.start('cena3');
+      });
+    
+    this.add.text(50, this.game.config.height * 0.95, '[cutscene]')
       .setInteractive()
       .on('pointerdown', () => {
         this.musicaSound.stop();
