@@ -325,11 +325,8 @@ export default class Cena2 extends Phaser.Scene {
     } else {
       // Caso contrário, mantenha o sprite do botaoc2 como 0    
       this.portasobe2.body.setAllowGravity(true);
-
+      this.portasobe2.body.setGravityY(1000)
     }
-   
-
-    // ...
   }
   }
 
