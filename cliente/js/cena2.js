@@ -206,7 +206,7 @@ export default class Cena2 extends Phaser.Scene {
   .setScrollFactor(0, 0);
     // Configurar colisões
    
-    this.physics.add.collider(this.personagem, this.layerblocos,);
+    this.physics.add.collider(this.personagem, this.layerblocos);
     this.physics.add.collider(this.personagem, this.portasobe2);
 
     

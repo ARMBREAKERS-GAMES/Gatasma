@@ -111,6 +111,7 @@ export default class Cena3 extends Phaser.Scene {
           if (isCollidingWithLayer) {
             this.personagem.setVelocityY(-200);
           }
+          // if (this.personagem.body.blocked.down){this.personagem.setVelocityY(-200)}
         } else {
           this.personagem.anims.play(`gugu-${botao}`, true);
           this.personagem.setVelocityX((botao === 'direita') ? 100 : -100);
