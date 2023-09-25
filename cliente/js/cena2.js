@@ -61,6 +61,8 @@ export default class Cena2 extends Phaser.Scene {
 
   create() {
     this.input.addPointer(3)
+
+    this.scale.startFullscreen()
     
     this.musicaSound = this.sound.add('musica2');
     this.musicaSound.setLoop(true);

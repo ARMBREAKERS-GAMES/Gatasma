@@ -12,7 +12,7 @@ export default class Abertura extends Phaser.Scene {
     this.load.audio('musicaInicio', 'assets/ABERTURALULLABY.mp3');
   }
 
-  create() {
+  create () {
 
     this.aberturaSprite = this.add.sprite(400, 225, 'aberturaSprite');
   

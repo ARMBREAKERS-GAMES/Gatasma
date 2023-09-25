@@ -18,6 +18,7 @@ class Game extends Phaser.Game {
     this.scene.add('aberura', abertura)
     this.scene.add('cutscene', cutscene)
     this.scene.start('abertura')
+   
     
   }
 }

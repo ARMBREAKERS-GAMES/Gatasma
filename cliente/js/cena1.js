@@ -36,6 +36,8 @@ export default class Cena1 extends Phaser.Scene {
 
   create() {
     this.input.addPointer(3)
+
+    this.scale.startFullscreen()
     
     // Crie as camadas do mapa
     this.tilemapcena1 = this.make.tilemap({

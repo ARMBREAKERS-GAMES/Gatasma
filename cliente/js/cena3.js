@@ -29,6 +29,8 @@ export default class Cena3 extends Phaser.Scene {
   create() {
     this.input.addPointer(3)
 
+    this.scale.startFullscreen()
+
     this.tilemapcena3 = this.make.tilemap({
       key: 'tilemapcena3',
     });
@@ -105,18 +107,12 @@ export default class Cena3 extends Phaser.Scene {
       .on('pointerdown', () => {
         this[botao].setFrame(1);
         if (botao === 'cima') {
-          const bottomCheckPoint = this.personagem.y + this.personagem.displayHeight / 2 + 1;
-          const isCollidingWithLayer = this.layerblocos.getTileAtWorldXY(this.personagem.x, bottomCheckPoint);
-
-          if (isCollidingWithLayer) {
-            this.personagem.setVelocityY(-200);
-          }
-          // if (this.personagem.body.blocked.down){this.personagem.setVelocityY(-200)}
-        } else {
+          if (this.personagem.body.blocked.down){this.personagem.setVelocityY(-200)}
+          } else {
           this.personagem.anims.play(`gugu-${botao}`, true);
           this.personagem.setVelocityX((botao === 'direita') ? 100 : -100);
         }
-      })
+        })
       .on('pointerup', () => {
         this[botao].setFrame(0);
         if (botao !== 'cima') {
