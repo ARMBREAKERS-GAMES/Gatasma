@@ -56,13 +56,16 @@ export default class Cena2 extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 64,
     });
-    
+    this.load.spritesheet('tela-cheia', './assets/fsb.png', {
+      frameWidth: 32,
+      frameHeight: 32
+    })
   }
 
   create() {
     this.input.addPointer(3)
 
-    this.scale.startFullscreen()
+    
     
     this.musicaSound = this.sound.add('musica2');
     this.musicaSound.setLoop(true);
@@ -194,6 +197,7 @@ export default class Cena2 extends Phaser.Scene {
       this.alavanca2.setFrame(2);
       this.porta2.setFrame(0)
       
+      
     }
 
     // Defina o frame do botaoa para 1
@@ -210,7 +214,21 @@ export default class Cena2 extends Phaser.Scene {
    
     this.physics.add.collider(this.personagem, this.layerblocos);
     this.physics.add.collider(this.personagem, this.portasobe2);
+    /*Full Screen*/
 
+    this.tela_cheia = this.add
+      .sprite(770, 30, 'tela-cheia', 0)
+      .setInteractive()
+      .on('pointerdown', () => {
+        if (this.scale.isFullscreen) {
+          this.tela_cheia.setFrame(0)
+          this.scale.stopFullscreen()
+        } else {
+          this.tela_cheia.setFrame(1)
+          this.scale.startFullscreen()
+        }
+      })
+      .setScrollFactor(0, 0)
     
   }
   criarBotao(botao, x) {

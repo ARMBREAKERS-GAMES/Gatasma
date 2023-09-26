@@ -32,12 +32,16 @@ export default class Cena1 extends Phaser.Scene {
       frameHeight: 64,
     });
     this.load.audio('passo', 'assets/passo.mp3');
+
+    this.load.spritesheet('tela-cheia', './assets/fsb.png', {
+      frameWidth: 32,
+      frameHeight: 32
+    })
   }
 
   create() {
     this.input.addPointer(3)
 
-    this.scale.startFullscreen()
     
     // Crie as camadas do mapa
     this.tilemapcena1 = this.make.tilemap({
@@ -147,6 +151,22 @@ export default class Cena1 extends Phaser.Scene {
     this.previousCameraX = this.cameras.main.scrollX;
 
     this.textShown = false
+
+    /*Full Screen*/
+
+    this.tela_cheia = this.add
+      .sprite(630, 100, 'tela-cheia', 0)
+      .setInteractive()
+      .on('pointerdown', () => {
+        if (this.scale.isFullscreen) {
+          this.tela_cheia.setFrame(0)
+          this.scale.stopFullscreen()
+        } else {
+          this.tela_cheia.setFrame(1)
+          this.scale.startFullscreen()
+        }
+      })
+      .setScrollFactor(0, 0)
   }
 
   criarBotao(botao, x) {

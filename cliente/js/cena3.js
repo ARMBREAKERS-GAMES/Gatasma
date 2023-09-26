@@ -23,13 +23,14 @@ export default class Cena3 extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 64,
     });
-
+    this.load.spritesheet('tela-cheia', './assets/fsb.png', {
+      frameWidth: 32,
+      frameHeight: 32
+    })
    }
 
   create() {
     this.input.addPointer(3)
-
-    this.scale.startFullscreen()
 
     this.tilemapcena3 = this.make.tilemap({
       key: 'tilemapcena3',
@@ -98,6 +99,21 @@ export default class Cena3 extends Phaser.Scene {
     this.criarBotao('direita', 166);
     this.criarBotao('esquerda', 70);
     this.criarBotao('cima', 730);
+    /*Full Screen*/
+
+    this.tela_cheia = this.add
+      .sprite(770, 30, 'tela-cheia', 0)
+      .setInteractive()
+      .on('pointerdown', () => {
+        if (this.scale.isFullscreen) {
+          this.tela_cheia.setFrame(0)
+          this.scale.stopFullscreen()
+        } else {
+          this.tela_cheia.setFrame(1)
+          this.scale.startFullscreen()
+        }
+      })
+      .setScrollFactor(0, 0)
 
   }
 
