@@ -1,8 +1,16 @@
 const express = require('express')
 const app = express()
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
 const PORT = process.env.PORT || 3000
 
+io.on('connection', (socket) => {
+  console.log('Usuário %s conectado no servidor.', socket.id)
+
+  socket.on('disconnect', () => { })
+  console.log('usuario %s desconectou.', socket.id)
+})
+
 app.use(express.static('../cliente/'))
-app.listen(PORT, () =>
-  console.log(`Servidor em execução na porta ${PORT}!`)
+server.listen(PORT, () => console.log(`Servidor em execução na porta ${PORT}!`)
 )

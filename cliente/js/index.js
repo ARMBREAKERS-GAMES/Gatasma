@@ -7,10 +7,11 @@ import cena3 from './cena3.js'
 import abertura from './abertura.js'
 import cutscene from './cutscene.js'
 
-
 class Game extends Phaser.Game {
   constructor () {
     super(config)
+
+    this.socket = io()
 
     this.scene.add('cena1', cena1)
     this.scene.add('cena2', cena2)
@@ -18,8 +19,6 @@ class Game extends Phaser.Game {
     this.scene.add('aberura', abertura)
     this.scene.add('cutscene', cutscene)
     this.scene.start('abertura')
-   
-    
   }
 }
 
