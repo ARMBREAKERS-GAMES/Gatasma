@@ -25,8 +25,11 @@ export default class Abertura extends Phaser.Scene {
         .setInteractive()
         .on('pointerdown', () => {
           this.game.socket.emit('entrar-na-sala', sala.numero)
-          this.game.scene.stop('sala')
-          this.game.scene.start('cena1')
+          this.game.socket.on('jogadores', (jogadores) => {
+            this.game.jogadores = jogadores
+            this.game.scene.stop('sala')
+            this.game.scene.start('cena1')
+          })
         })
     })
   }
