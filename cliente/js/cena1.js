@@ -14,6 +14,10 @@ export default class Cena1 extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 64
     })
+    this.load.spritesheet('vivi', 'assets/vivi.png', {
+      frameWidth: 64,
+      frameHeight: 64
+    })
     this.load.spritesheet('direita', 'assets/botao.png', {
       frameWidth: 64,
       frameHeight: 64
@@ -48,6 +52,19 @@ export default class Cena1 extends Phaser.Scene {
     this.layerchaocortina = this.tilemapcena1.createLayer('chao-cortina', [this.tilesetcena1])
     this.layercortina2 = this.tilemapcena1.createLayer('cortina', [this.tilesetcena1])
     this.layerpilares = this.tilemapcena1.createLayer('pilares', [this.tilesetcena1])
+
+    /*if (this.game.jogadores.primeiro === this.game.socket.id) {
+      this.personagem = this.physics.add.sprite(x, y, 'gugu', 0)
+      
+    } else if (this.game.jogadores.segundo === this.game.socket.id) {
+      this.personagem = this.physics.add.sprite(x, y, 'gugu', 0)
+    } else {
+      
+    }*/
+
+
+
+
     // Crie o personagem
     this.personagem = this.physics.add.sprite(0, 200, 'gugu')
     const hitboxWidth = 17
