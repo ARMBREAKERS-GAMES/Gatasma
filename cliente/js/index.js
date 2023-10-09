@@ -21,9 +21,9 @@ class Game extends Phaser.Game {
     this.scene.add('sala', sala)
     this.scene.add('cena2', cena2)
     this.scene.add('cena3', cena3)
-    this.scene.add('aberura', abertura)
+    this.scene.add('abertura', abertura)
     this.scene.add('cutscene', cutscene)
-    this.scene.start('sala')
+    this.scene.start('abertura')
   }
 }
 

@@ -53,20 +53,22 @@ export default class Cena1 extends Phaser.Scene {
     this.layercortina2 = this.tilemapcena1.createLayer('cortina', [this.tilesetcena1])
     this.layerpilares = this.tilemapcena1.createLayer('pilares', [this.tilesetcena1])
 
-    /*if (this.game.jogadores.primeiro === this.game.socket.id) {
-      this.personagem = this.physics.add.sprite(x, y, 'gugu', 0)
-      
+    if (this.game.jogadores.primeiro === this.game.socket.id) {
+      this.local = 'gugu'
+      this.remoto = 'vivi'
+      this.personagem = this.physics.add.sprite(0, 200, this.local, 0)
+      this.personagemRemoto = this.add.sprite(64, 200, this.remoto, 0)
     } else if (this.game.jogadores.segundo === this.game.socket.id) {
-      this.personagem = this.physics.add.sprite(x, y, 'gugu', 0)
+      this.local = 'vivi'
+      this.remoto = 'gugu'
+      this.personagemRemoto = this.add.sprite(64, 200, this.remoto, 0)
+      this.personagem = this.physics.add.sprite(0, 200, this.local, 0)
     } else {
-      
-    }*/
-
-
-
+      // jogador em tela cheia
+    }
 
     // Crie o personagem
-    this.personagem = this.physics.add.sprite(0, 200, 'gugu')
+    // this.personagem = this.physics.add.sprite(0, 200, 'gugu')
     const hitboxWidth = 17
     const hitboxHeight = 56
     const offsetX = (this.personagem.width - hitboxWidth) / 2
@@ -80,31 +82,13 @@ export default class Cena1 extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, 1120, 450)
     this.cameras.main.setBounds(0, -150, 1120, 450)
     this.cameras.main.setZoom(this.cameras.main.zoom + 0.5)
-    // var postFxPlugin = this.plugins.get('rexpixelationpipelineplugin');
-    // this.cameraFilter = postFxPlugin.add(this.cameras.main);
-
-    // Defina o nível de pixelização inicial aqui (valores maiores significam mais pixelização)
-    // this.cameraFilter.pixelWidth = 40; // Por exemplo, defina como 10
-    // this.cameraFilter.pixelHeight = 40; // Por exemplo, defina como 10
-
-    // Adicione um tweens para animar a pixelização
-    /* this.tweens.add({
-       targets: this.cameraFilter,
-       pixelWidth: 0, // Defina a pixelização para o mínimo (sem pixelização)
-       pixelHeight: 0,
-       ease: 'Linear',
-       duration: 3500,
-       repeat: 0,
-       yoyo: false
-     }); */
-
     // Crie o pilar
     this.pilar = this.add.sprite(641, 152, 'pilarsu', 0)
 
     // Crie animações para o personagem
     this.anims.create({
-      key: 'gugu-parado-direita',
-      frames: this.anims.generateFrameNumbers('gugu', {
+      key: 'personagem-parado-direita',
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 0,
         end: 3
       }),
@@ -113,8 +97,8 @@ export default class Cena1 extends Phaser.Scene {
     })
 
     this.anims.create({
-      key: 'gugu-parado-esquerda',
-      frames: this.anims.generateFrameNumbers('gugu', {
+      key: 'personagem-parado-esquerda',
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 8,
         end: 11
       }),
@@ -123,8 +107,8 @@ export default class Cena1 extends Phaser.Scene {
     })
 
     this.anims.create({
-      key: 'gugu-direita',
-      frames: this.anims.generateFrameNumbers('gugu', {
+      key: 'personagem-direita',
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 4,
         end: 7
       }),
@@ -133,8 +117,8 @@ export default class Cena1 extends Phaser.Scene {
     })
 
     this.anims.create({
-      key: 'gugu-esquerda',
-      frames: this.anims.generateFrameNumbers('gugu', {
+      key: 'personagem-esquerda',
+      frames: this.anims.generateFrameNumbers(this.local, {
         start: 12,
         end: 15
       }),
@@ -143,7 +127,7 @@ export default class Cena1 extends Phaser.Scene {
     })
 
     this.anims.create({
-      key: 'gugu-cima' // Defina os quadros para esta animação
+      key: 'personagem-cima' // Defina os quadros para esta animação
     })
 
     // Crie botões
@@ -190,7 +174,7 @@ export default class Cena1 extends Phaser.Scene {
             this.personagem.setVelocityY(-100)
           }
         } else {
-          this.personagem.anims.play(`gugu-${botao}`, true)
+          this.personagem.anims.play(`personagem-${botao}`, true)
           this.personagem.setVelocityX((botao === 'direita') ? 100 : -100)
         }
         this.passoSound = this.sound.add('passo')
@@ -202,7 +186,7 @@ export default class Cena1 extends Phaser.Scene {
       .on('pointerup', () => {
         this[botao].setFrame(0)
         if (botao !== 'cima') {
-          this.personagem.anims.play(`gugu-parado-${botao}`)
+          this.personagem.anims.play(`personagem-parado-${botao}`)
           this.personagem.setVelocityX(0)
         }
         this.passoSound.stop()
@@ -233,10 +217,6 @@ export default class Cena1 extends Phaser.Scene {
           this.scene.stop('cena1')
           this.scene.start('cena2')
         })
-
-      // Destrói a cena1 e inicia a cena2
-      // this.scene.stop('cena1');
-      // this.scene.start('cena2');
     }
   }
 }

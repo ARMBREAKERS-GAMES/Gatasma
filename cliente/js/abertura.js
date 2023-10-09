@@ -51,7 +51,7 @@ export default class Abertura extends Phaser.Scene {
       .on('pointerdown', () => {
         this.musicaSound.stop()
         this.scene.stop('abertura')
-        this.scene.start('cena1')
+        this.scene.start('sala')
       })
 
     /* Abertura */
