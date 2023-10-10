@@ -192,9 +192,24 @@ export default class Cena1 extends Phaser.Scene {
         this.passoSound.stop()
       })
       .setScrollFactor(0, 0)
+
+    this.game.socket.on('estado-notificar', ({ cena, x, y, frame }) => {
+      this.personagemRemoto.x = x
+      this.personagemRemoto.y = y
+      this.personagemremoto.setFrame(frame)
+    })
   }
 
   update () {
+    try {
+      this.game.socket.emit('estado-publicar', this.game.sala, {
+        cena: 'cena1',
+        x: this.personagem.x,
+        y: this.personagem.y,
+        frame: this.personagem.frame.name
+      })
+    } catch (error) { }
+
     const cameraY = this.personagem.y - 80
     const smoothFactor = 0.1
     const newCameraY = Phaser.Math.Linear(this.cameras.main.scrollY, cameraY, smoothFactor)
