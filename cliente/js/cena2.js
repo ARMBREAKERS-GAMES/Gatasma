@@ -64,6 +64,7 @@ export default class Cena2 extends Phaser.Scene {
 
   create () {
     this.input.addPointer(3)
+    this.cena = 'cena2'
 
     this.musicaSound = this.sound.add('musica2')
     this.musicaSound.setLoop(true)
@@ -250,8 +251,19 @@ export default class Cena2 extends Phaser.Scene {
   }
 
   update () {
+    try {
+      this.game.socket.emit('estado-publicar', this.game.sala, {
+        cena: this.cena,
+        x: this.personagem.x,
+        y: this.personagem.y,
+        frame: this.personagem.frame.name
+      })
+    } catch (error) {
+      console.error(error)
+    }
+
     if (this.botoesPressionados.cima) {
-    // Ação quando o botão 'cima' estiver pressionado
+      // Ação quando o botão 'cima' estiver pressionado
       const bottomCheckPoint = this.personagem.y + this.personagem.displayHeight / 2 + 1
       const isCollidingWithLayer = this.layerblocos.getTileAtWorldXY(this.personagem.x, bottomCheckPoint)
 
@@ -261,13 +273,13 @@ export default class Cena2 extends Phaser.Scene {
     }
 
     if (this.botoesPressionados.direita) {
-    // Ação quando o botão 'direita' estiver pressionado
+      // Ação quando o botão 'direita' estiver pressionado
       this.personagem.anims.play('gugu-direita', true)
       this.personagem.setVelocityX(100)
     }
 
     if (this.botoesPressionados.esquerda) {
-    // Ação quando o botão 'esquerda' estiver pressionado
+      // Ação quando o botão 'esquerda' estiver pressionado
       this.personagem.anims.play('gugu-esquerda', true)
       this.personagem.setVelocityX(-100)
     }

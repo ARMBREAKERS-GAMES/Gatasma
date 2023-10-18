@@ -40,6 +40,7 @@ export default class Cena1 extends Phaser.Scene {
 
   create () {
     this.input.addPointer(3)
+    this.cena = 'cena1'
 
     // Crie as camadas do mapa
     this.tilemapcena1 = this.make.tilemap({
@@ -194,21 +195,28 @@ export default class Cena1 extends Phaser.Scene {
       .setScrollFactor(0, 0)
 
     this.game.socket.on('estado-notificar', ({ cena, x, y, frame }) => {
+      console.log(cena)
+      if (cena !== this.cena) {
+        this.scene.stop(this.cena)
+        this.scene.start(cena)
+      }
       this.personagemRemoto.x = x
       this.personagemRemoto.y = y
-      this.personagemremoto.setFrame(frame)
+      this.personagemRemoto.setFrame(frame)
     })
   }
 
   update () {
     try {
       this.game.socket.emit('estado-publicar', this.game.sala, {
-        cena: 'cena1',
+        cena: this.cena,
         x: this.personagem.x,
         y: this.personagem.y,
         frame: this.personagem.frame.name
       })
-    } catch (error) { }
+    } catch (error) {
+      console.error(error)
+    }
 
     const cameraY = this.personagem.y - 80
     const smoothFactor = 0.1
