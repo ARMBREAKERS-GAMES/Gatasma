@@ -250,6 +250,10 @@ export default class Cena1 extends Phaser.Scene {
       this.personagemRemoto.y = y
       this.personagemRemoto.setFrame(frame)
     })
+    this.game.socket.on('cena-notificar', cena => {
+      this.game.scene.stop('cena1')
+      this.game.scene.start('cena2')
+    })
   }
 
   update () {
