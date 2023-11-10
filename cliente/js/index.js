@@ -48,7 +48,13 @@ class Game extends Phaser.Game {
     this.scene.add('cena3', cena3)
     this.scene.add('abertura', abertura)
     this.scene.add('cutscene', cutscene)
-    this.scene.start('abertura')
+
+    this.cena = 'abertura'
+    this.scene.start(this.cena)
+    this.socket.on('cena-notificar', cena => {
+      this.scene.stop(this.cena)
+      this.scene.start(cena)
+    })
   }
 }
 

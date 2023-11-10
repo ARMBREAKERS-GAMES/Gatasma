@@ -62,9 +62,9 @@ export default class Cena2 extends Phaser.Scene {
     })
   }
 
-  create () {
+  create() {
+    this.game.cena = 'cena2'
     this.input.addPointer(3)
-    this.cena = 'cena2'
 
     this.musicaSound = this.sound.add('musica2')
     this.musicaSound.setLoop(true)
@@ -219,7 +219,7 @@ export default class Cena2 extends Phaser.Scene {
       .setScrollFactor(0, 0)
   }
 
-  criarBotao (botao, x) {
+  criarBotao(botao, x) {
     this[botao] = this.add.sprite(x, 415, botao, 0)
       .setInteractive()
       .on('pointerdown', () => {
@@ -253,7 +253,6 @@ export default class Cena2 extends Phaser.Scene {
   update () {
     try {
       this.game.socket.emit('estado-publicar', this.game.sala, {
-        cena: this.cena,
         x: this.personagem.x,
         y: this.personagem.y,
         frame: this.personagem.frame.name

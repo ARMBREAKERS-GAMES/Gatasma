@@ -39,8 +39,8 @@ export default class Cena1 extends Phaser.Scene {
   }
 
   create () {
+    this.game.cena = 'cena1'
     this.input.addPointer(3)
-    this.cena = 'cena1'
 
     // Crie as camadas do mapa
     this.tilemapcena1 = this.make.tilemap({
@@ -92,9 +92,6 @@ export default class Cena1 extends Phaser.Scene {
 
       this.game.remoteConnection.onicecandidate = ({ candidate }) =>
         candidate && this.game.socket.emit('candidate', this.game.sala, candidate)
-
-      this.game.remoteConnection.ontrack = ({ streams: [midia] }) =>
-        this.game.audio.srcObject = midia
 
       this.game.midias.getTracks()
         .forEach((track) => this.game.remoteConnection.addTrack(track, this.game.midias))
@@ -240,26 +237,16 @@ export default class Cena1 extends Phaser.Scene {
       })
       .setScrollFactor(0, 0)
 
-    this.game.socket.on('estado-notificar', ({ cena, x, y, frame }) => {
-      console.log(cena)
-      if (cena !== this.cena) {
-        this.scene.stop(this.cena)
-        this.scene.start(cena)
-      }
+    this.game.socket.on('estado-notificar', ({ x, y, frame }) => {
       this.personagemRemoto.x = x
       this.personagemRemoto.y = y
       this.personagemRemoto.setFrame(frame)
-    })
-    this.game.socket.on('cena-notificar', cena => {
-      this.game.scene.stop('cena1')
-      this.game.scene.start('cena2')
     })
   }
 
   update () {
     try {
       this.game.socket.emit('estado-publicar', this.game.sala, {
-        cena: this.cena,
         x: this.personagem.x,
         y: this.personagem.y,
         frame: this.personagem.frame.name
@@ -287,6 +274,7 @@ export default class Cena1 extends Phaser.Scene {
       this.add.text(980, 10, '[próxima fase]')
         .setInteractive()
         .on('pointerdown', () => {
+          this.game.socket.emit('cena-publicar', this.game.sala, 'cena2')
           this.scene.stop('cena1')
           this.scene.start('cena2')
         })
