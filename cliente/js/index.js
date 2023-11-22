@@ -12,7 +12,7 @@ class Game extends Phaser.Game {
   constructor () {
     super(config)
 
-    this.id = 1 // Jogo GATASMA, id 1
+    this.id = 11 // Jogo GATASMA, id 1
     this.valor = 100 // crédito padrão em Tijolinhos quando termina o jogo
 
     let iceServers
