@@ -64,7 +64,7 @@ export default class Cutscene extends Phaser.Scene {
                         this.time.delayedCall(5000, () => {
                           this.musicaSound.stop()
                           // Inicie a cena1
-                          this.scene.start('cena1')
+                          this.scene.start('sala')
                         })
                       })
                     })
