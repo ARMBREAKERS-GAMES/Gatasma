@@ -269,7 +269,7 @@ export default class Cena1 extends Phaser.Scene {
 
     this.previousCameraX = this.cameras.main.scrollX
     const limiteDireitoTela = 1020 // Altere para o valor apropriado
-    if ((this.personagem.x >= limiteDireitoTela) && (this.textShown == false)) {
+    if ((this.personagem.x >= limiteDireitoTela) && (this.textShown === false)) {
       this.textShown = true
       this.add.text(980, 10, '[próxima fase]')
         .setInteractive()

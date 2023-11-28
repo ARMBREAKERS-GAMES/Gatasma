@@ -62,7 +62,7 @@ export default class Cena2 extends Phaser.Scene {
     })
   }
 
-  create() {
+  create () {
     this.game.cena = 'cena2'
     this.input.addPointer(3)
 
@@ -105,11 +105,23 @@ export default class Cena2 extends Phaser.Scene {
     this.layerblocos = this.tilemapcena2.createLayer('blocos', [this.tilesetcena2])
     this.layerblocos.setCollisionByProperty({ collides: true })
 
-    this.personagem = this.physics.add.sprite(0, 380, 'gugu')
+    if (this.game.jogadores.primeiro === this.game.socket.id) {
+      this.local = 'gugu'
+      this.remoto = 'vivi'
+      this.personagem = this.physics.add.sprite(0, 200, this.local, 0)
+      this.personagemRemoto = this.add.sprite(64, 200, this.remoto, 0)
+    } else if (this.game.jogadores.segundo === this.game.socket.id) {
+      this.local = 'vivi'
+      this.remoto = 'gugu'
+      this.personagemRemoto = this.add.sprite(64, 200, this.remoto, 0)
+      this.personagem = this.physics.add.sprite(0, 200, this.local, 0)
+    }
+
     const hitboxWidth = 17
     const hitboxHeight = 58
     const offsetX = 24
     const offsetY = 6
+
     this.personagem.setSize(hitboxWidth, hitboxHeight, true)
     this.personagem.body.offset.set(offsetX, offsetY)
     this.personagem.setCollideWorldBounds(true)
@@ -117,8 +129,8 @@ export default class Cena2 extends Phaser.Scene {
     this.cameras.main.startFollow(this.personagem, false, 1, 0)
     this.cameras.main.setBounds(0, 30, 800, 450)
     this.anims.create({
-      key: 'gugu-parado-direita',
-      frames: this.anims.generateFrameNumbers('gugu', {
+      key: 'personagem-parado-direita',
+      frames: this.anims.generateFrameNumbers('this.local', {
         start: 0,
         end: 3
       }),
@@ -127,8 +139,8 @@ export default class Cena2 extends Phaser.Scene {
     })
 
     this.anims.create({
-      key: 'gugu-parado-esquerda',
-      frames: this.anims.generateFrameNumbers('gugu', {
+      key: 'personagem-parado-esquerda',
+      frames: this.anims.generateFrameNumbers('this.local', {
         start: 8,
         end: 11
       }),
@@ -137,8 +149,8 @@ export default class Cena2 extends Phaser.Scene {
     })
 
     this.anims.create({
-      key: 'gugu-direita',
-      frames: this.anims.generateFrameNumbers('gugu', {
+      key: 'personagem-direita',
+      frames: this.anims.generateFrameNumbers('this.local', {
         start: 4,
         end: 7
       }),
@@ -147,8 +159,8 @@ export default class Cena2 extends Phaser.Scene {
     })
 
     this.anims.create({
-      key: 'gugu-esquerda',
-      frames: this.anims.generateFrameNumbers('gugu', {
+      key: 'personagem-esquerda',
+      frames: this.anims.generateFrameNumbers('this.local', {
         start: 12,
         end: 15
       }),
@@ -217,9 +229,15 @@ export default class Cena2 extends Phaser.Scene {
         }
       })
       .setScrollFactor(0, 0)
+
+    this.game.socket.on('estado-notificar', ({ x, y, frame }) => {
+      this.personagemRemoto.x = x
+      this.personagemRemoto.y = y
+      this.personagemRemoto.setFrame(frame)
+    })
   }
 
-  criarBotao(botao, x) {
+  criarBotao (botao, x) {
     this[botao] = this.add.sprite(x, 415, botao, 0)
       .setInteractive()
       .on('pointerdown', () => {
@@ -234,7 +252,7 @@ export default class Cena2 extends Phaser.Scene {
             this.personagem.setVelocityY(-500)
           }
         } else {
-          this.personagem.anims.play(`gugu-${botao}`, true)
+          this.personagem.anims.play(`personagem-${botao}`, true)
           this.personagem.setVelocityX((botao === 'direita') ? 100 : -100)
         }
       })
@@ -243,7 +261,7 @@ export default class Cena2 extends Phaser.Scene {
         this.botoesPressionados[botao] = false
 
         if (botao !== 'cima') {
-          this.personagem.anims.play(`gugu-parado-${botao}`)
+          this.personagem.anims.play(`personagem-parado-${botao}`)
           this.personagem.setVelocityX(0)
         }
       })
@@ -273,13 +291,13 @@ export default class Cena2 extends Phaser.Scene {
 
     if (this.botoesPressionados.direita) {
       // Ação quando o botão 'direita' estiver pressionado
-      this.personagem.anims.play('gugu-direita', true)
+      this.personagem.anims.play('personagem-direita', true)
       this.personagem.setVelocityX(100)
     }
 
     if (this.botoesPressionados.esquerda) {
       // Ação quando o botão 'esquerda' estiver pressionado
-      this.personagem.anims.play('gugu-esquerda', true)
+      this.personagem.anims.play('personagem-esquerda', true)
       this.personagem.setVelocityX(-100)
     }
 
