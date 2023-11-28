@@ -31,7 +31,15 @@ io.on('connection', (socket) => {
 
     io.to(sala).emit('jogadores', jogadores)
   })
-
+  socket.on('botaoc2-publicar', (sala, estado) => {
+    socket.to(sala).emit('botaoc2-notificar', estado)
+  })
+  socket.on('alavanca2-publicar', (sala, estado) => {
+    socket.to(sala).emit('alavanca2-notificar', estado)
+  })
+  socket.on('portasobe2-publicar', (sala, estado) => {
+    socket.to(sala).emit('portasobe2-notificar', estado)
+  })
   socket.on('estado-publicar', (sala, estado) => {
     socket.to(sala).emit('estado-notificar', estado)
   })

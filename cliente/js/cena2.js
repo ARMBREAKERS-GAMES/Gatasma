@@ -266,6 +266,22 @@ export default class Cena2 extends Phaser.Scene {
         }
       })
       .setScrollFactor(0, 0)
+
+    this.game.socket.on('botaoc2-notificar', ({ x, y, frame }) => {
+      this.botaoc2.x = x
+      this.botaoc2.y = y
+      this.botaoc2.setFrame(frame)
+    })
+    this.game.socket.on('portasobe2-notificar', ({ x, y, frame }) => {
+      this.portasobe2.x = x
+      this.portasobe2.y = y
+      this.portasobe2.setFrame(frame)
+    })
+    this.game.socket.on('alavanca2-notificar', ({ x, y, frame }) => {
+      this.alavanca2.x = x
+      this.alavanca2.y = y
+      this.alavanca2.setFrame(frame)
+    })
   }
 
   update () {
@@ -274,6 +290,15 @@ export default class Cena2 extends Phaser.Scene {
         x: this.personagem.x,
         y: this.personagem.y,
         frame: this.personagem.frame.name
+      })
+    } catch (error) {
+      console.error(error)
+    }
+    try {
+      this.game.socket.emit('botaoc2-publicar', this.game.sala, {
+        x: this.botaoc2.x,
+        y: this.botaoc2.y,
+        frame: this.botaoc2.frame.name
       })
     } catch (error) {
       console.error(error)
