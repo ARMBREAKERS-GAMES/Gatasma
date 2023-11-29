@@ -267,20 +267,21 @@ export default class Cena2 extends Phaser.Scene {
       })
       .setScrollFactor(0, 0)
 
-    this.game.socket.on('botaoc2-notificar', ({ x, y, frame }) => {
-      this.botaoc2.x = x
-      this.botaoc2.y = y
-      this.botaoc2.setFrame(frame)
+    this.game.socket.on('botaoc2-notificar', (botao) => {
+      if (botao.pressionado && this.portasobe2.setVelocityY !== 0) {
+        this.botaoc2.setFrame(1)
+        this.portasobe2.setVelocityY(-30)
+      }
     })
     this.game.socket.on('portasobe2-notificar', ({ x, y, frame }) => {
       this.portasobe2.x = x
       this.portasobe2.y = y
       this.portasobe2.setFrame(frame)
     })
-    this.game.socket.on('alavanca2-notificar', ({ x, y, frame }) => {
-      this.alavanca2.x = x
-      this.alavanca2.y = y
-      this.alavanca2.setFrame(frame)
+    this.game.socket.on('botaoa-notificar', (botaoazul) => {
+      if (botaoazul.pressionado && this.porta2.frame.name === 1) {
+        this.porta2.setFrame(0)
+      }
     })
   }
 
@@ -290,15 +291,6 @@ export default class Cena2 extends Phaser.Scene {
         x: this.personagem.x,
         y: this.personagem.y,
         frame: this.personagem.frame.name
-      })
-    } catch (error) {
-      console.error(error)
-    }
-    try {
-      this.game.socket.emit('botaoc2-publicar', this.game.sala, {
-        x: this.botaoc2.x,
-        y: this.botaoc2.y,
-        frame: this.botaoc2.frame.name
       })
     } catch (error) {
       console.error(error)
@@ -336,6 +328,7 @@ export default class Cena2 extends Phaser.Scene {
       // Quando houver sobreposição, mude o sprite do botaoc2 para 1
       this.botaoc2.setFrame(1)
       this.portasobe2.setVelocityY(-30)
+      this.game.socket.emit('botaoc2-publicar', this.game.sala, { pressionado: true })
     } else {
       // Caso contrário, mantenha o sprite do botaoc2 como 0
       this.botaoc2.setFrame(0)
@@ -354,15 +347,6 @@ export default class Cena2 extends Phaser.Scene {
         .setAlpha(0)
     }
 
-    if (isOverlapping) {
-      // Quando houver sobreposição, mude o sprite do botaoc2 para 1
-      this.botaoc2.setFrame(1)
-      this.portasobe2.setVelocityY(-30)
-    } else {
-      // Caso contrário, mantenha o sprite do botaoc2 como 0
-      this.botaoc2.setFrame(0)
-      this.portasobe2.setVelocityY(0)
-    }
     // Verifica a sobreposição entre o personagem e o botaoc2Collider
     const isOverlappingtransparente = Phaser.Geom.Intersects.RectangleToRectangle(
       this.portasobe2.getBounds(),
