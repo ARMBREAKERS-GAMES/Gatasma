@@ -1,6 +1,6 @@
 export default class finalFeliz extends Phaser.Scene {
   constructor () {
-    super('final-feliz')
+    super('finalfeliz')
   }
 
   preload () {

@@ -7,6 +7,7 @@ import cena3 from './cena3.js'
 import sala from './sala.js'
 import abertura from './abertura.js'
 import cutscene from './cutscene.js'
+import finalfeliz from './finalfeliz.js'
 
 class Game extends Phaser.Game {
   constructor () {
@@ -48,6 +49,7 @@ class Game extends Phaser.Game {
     this.scene.add('cena3', cena3)
     this.scene.add('abertura', abertura)
     this.scene.add('cutscene', cutscene)
+    this.scene.add('finalfeliz', finalfeliz)
 
     this.cena = 'abertura'
     this.scene.start(this.cena)

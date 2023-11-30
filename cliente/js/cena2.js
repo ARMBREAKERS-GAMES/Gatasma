@@ -108,13 +108,13 @@ export default class Cena2 extends Phaser.Scene {
     if (this.game.jogadores.primeiro === this.game.socket.id) {
       this.local = 'gugu'
       this.remoto = 'vivi'
-      this.personagem = this.physics.add.sprite(0, 200, this.local, 0)
-      this.personagemRemoto = this.add.sprite(64, 200, this.remoto, 0)
+      this.personagem = this.physics.add.sprite(10, 384, this.local, 0)
+      this.personagemRemoto = this.add.sprite(10, 384, this.remoto, 0)
     } else if (this.game.jogadores.segundo === this.game.socket.id) {
       this.local = 'vivi'
       this.remoto = 'gugu'
-      this.personagemRemoto = this.add.sprite(64, 200, this.remoto, 0)
-      this.personagem = this.physics.add.sprite(0, 200, this.local, 0)
+      this.personagemRemoto = this.add.sprite(10, 384, this.remoto, 0)
+      this.personagem = this.physics.add.sprite(10, 384, this.local, 0)
     }
 
     const hitboxWidth = 17
@@ -191,18 +191,9 @@ export default class Cena2 extends Phaser.Scene {
     this.botaoa = this.add.sprite(634, 415, 'botaoa', 0)
       .setInteractive()
       .on('pointerdown', () => {
-        const isCollidingWithAlavanca2 = Phaser.Geom.Intersects.RectangleToRectangle(
-          this.personagem.getBounds(),
-          this.alavanca2Collider.getBounds()
-        )
-
-        if (isCollidingWithAlavanca2) {
-          // Se estiver colidindo com a alavanca2, defina o frame da alavanca2 para 2
-          this.alavanca2.setFrame(2)
-          this.porta2.setFrame(0)
-        }
-
-        // Defina o frame do botaoa para 1
+        this.game.socket.emit('artefatos-publicar', this.game.sala, { portasso2: true })
+        this.alavanca2.setFrame(2)
+        this.porta2.setFrame(0)
         this.botaoa.setFrame(1)
       })
       .on('pointerup', () => {
@@ -235,6 +226,18 @@ export default class Cena2 extends Phaser.Scene {
       this.personagemRemoto.y = y
       this.personagemRemoto.setFrame(frame)
     })
+    this.physics.add.collider(this.personagem, this.porta2, this.handlePortaCollision, null, this)
+    this.physics.add.collider(this.personagemRemoto, this.porta2, this.handlePortaCollision, null, this)
+    // Método para lidar com a colisão com a porta2
+  }
+
+  handlePortaCollision (personagem, porta2) {
+    if (porta2.frame.name === 0) {
+      // Aqui você pode adicionar a lógica para mostrar texto ou iniciar a cena3
+      console.log('Gugu ou Vivi está em contato com a porta2 no frame 0!')
+      // Exemplo de como iniciar a cena3 após 1 segundo
+      this.scene.start('finalfeliz')
+    }
   }
 
   criarBotao (botao, x) {
@@ -278,9 +281,11 @@ export default class Cena2 extends Phaser.Scene {
       this.portasobe2.y = y
       this.portasobe2.setFrame(frame)
     })
-    this.game.socket.on('botaoa-notificar', (botaoazul) => {
-      if (botaoazul.pressionado && this.porta2.frame.name === 1) {
+    this.game.socket.on('artefatos-notificar', (artefatos) => {
+      if (artefatos.portasso2) {
+        this.alavanca2.setFrame(2)
         this.porta2.setFrame(0)
+        this.botaoa.setFrame(1)
       }
     })
   }
