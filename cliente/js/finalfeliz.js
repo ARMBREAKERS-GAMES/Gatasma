@@ -4,9 +4,9 @@ export default class finalFeliz extends Phaser.Scene {
   }
 
   preload () {
-    this.load.audio('clique', './assets/audios/clique.mp3')
-    this.load.audio('credito', './assets/audios/credito.mp3')
-    this.load.audio('erro', './assets/audios/erro.mp3')
+    this.load.audio('clique', './assets/clique.mp3')
+    this.load.audio('credito', './assets/credito.mp3')
+    this.load.audio('erro', './assets/erro.mp3')
   }
 
   create () {
