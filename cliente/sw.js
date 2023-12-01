@@ -4,6 +4,13 @@ const cacheName = 'cache-v1'
 // List the files to precache
 const precacheResources = [
   './',
+  './assets/logo/128.png',
+  './assets/logo/192.png',
+  './assets/logo/256.png',
+  './assets/logo/384.png',
+  './assets/logo/512.png',
+  './manifest.json',
+  './sw.js',
   './assets/Arte/cena1.json',
   './assets/Arte/cena1.png',
   './assets/cutscene/frasco.png',
