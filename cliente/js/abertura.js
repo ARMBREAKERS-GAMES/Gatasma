@@ -25,7 +25,7 @@ export default class Abertura extends Phaser.Scene {
       .on('pointerdown', () => {
         this.musicaSound.stop()
         this.scene.stop('abertura')
-        this.scene.start('sala')
+        this.scene.start('cutscene')
       })
 
     this.musicaSound = this.sound.add('musicaInicio')
