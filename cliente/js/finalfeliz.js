@@ -4,9 +4,9 @@ export default class finalFeliz extends Phaser.Scene {
   }
 
   preload () {
-    this.load.audio('clique', './assets/clique.mp3')
-    this.load.audio('credito', './assets/credito.mp3')
-    this.load.audio('erro', './assets/erro.mp3')
+    this.load.audio('clique', './assets/audios/clique.mp3')
+    this.load.audio('credito', './assets/audios/credito.mp3')
+    this.load.audio('erro', './assets/audios/erro.mp3')
   }
 
   create () {
@@ -16,11 +16,17 @@ export default class finalFeliz extends Phaser.Scene {
 
     this.posicao = ''
 
+    this.informacoes = this.add.text(36, 20, 'DIGITE SUAS \nINFORMAÇÕES', {
+      fontFamily: 'Silkscreen',
+      fontSize: '36px',
+      fill: '#ffffff'
+    })
+
     this.usuarioTextoBase = 'Usuário: '
     this.usuarioDigitado = ''
-    this.usuario = this.add.text(450, 100, this.usuarioTextoBase, {
-      fontFamily: 'monospace',
-      font: '32px Courier',
+    this.usuario = this.add.text(36, 164, this.usuarioTextoBase, {
+      fontFamily: 'Silkscreen',
+      fontSize: '32px',
       fill: '#cccccc'
     })
       .setInteractive()
@@ -29,15 +35,15 @@ export default class finalFeliz extends Phaser.Scene {
         this.posicao = 'usuário'
         this.usuario.setFill('#ffffff')
         this.senha.setFill('#cccccc')
-        this.voltar.x = 750
+        this.voltar.x = 392
         this.voltar.y = this.usuario.y
       })
 
     this.senhaTextoBase = 'Senha: '
     this.senhaDigitada = ''
-    this.senha = this.add.text(450, 200, this.senhaTextoBase, {
-      fontFamily: 'monospace',
-      font: '32px Courier',
+    this.senha = this.add.text(36, 240, this.senhaTextoBase, {
+      fontFamily: 'Silkscreen',
+      fontSize: '32px',
       fill: '#cccccc'
     })
       .setInteractive()
@@ -46,16 +52,16 @@ export default class finalFeliz extends Phaser.Scene {
         this.posicao = 'senha'
         this.usuario.setFill('#cccccc')
         this.senha.setFill('#ffffff')
-        this.voltar.x = 750
+        this.voltar.x = 392
         this.voltar.y = this.senha.y
       })
 
     const teclado = [...Array(10).keys()]
     teclado.forEach(digito => {
       const valor = (digito + 1) % 10
-      this.add.text(80 * ((digito % 3) + 1), 80 * (Math.floor(digito / 3) + 1), valor, {
-        fontFamily: 'monospace',
-        font: '32px Courier',
+      this.textoTeclado = this.add.text(108 * ((digito % 3) + 1), 80 * (Math.floor(digito / 3) + 4.5), valor, {
+        fontFamily: 'Silkscreen',
+        fontSize: '32px',
         fill: '#ffffff'
       })
         .setInteractive()
@@ -77,9 +83,9 @@ export default class finalFeliz extends Phaser.Scene {
             }
           }
           if (this.usuarioDigitado.length === 4 && this.senhaDigitada.length === 4) {
-            this.enviar = this.add.text(450, 300, '[ENVIAR]', {
-              fontFamily: 'monospace',
-              font: '64px Courier',
+            this.enviar = this.add.text(142, 684, '[ENVIAR]', {
+              fontFamily: 'Silkscreen',
+              fontSize: '32px',
               fill: '#ffffff'
             })
               .setInteractive()
@@ -88,7 +94,7 @@ export default class finalFeliz extends Phaser.Scene {
                   id: this.usuarioDigitado,
                   senha: this.senhaDigitada,
                   jogo: this.game.id,
-                  valor: this.game.valor
+                  valor: this.game.valor - 20
                 })
                   .then((response) => {
                     if (response.status === 200) {
@@ -101,8 +107,8 @@ export default class finalFeliz extends Phaser.Scene {
                           this.tempo--
                           if (this.tempo === 0) {
                             this.relogio.destroy()
-                            this.scene.stop('final-feliz')
-                            this.scene.start('cena1')
+                            this.scene.stop('vitoria')
+                            this.scene.start('abertura')
                           }
                         },
                         callbackScope: this,
@@ -136,8 +142,8 @@ export default class finalFeliz extends Phaser.Scene {
     })
 
     this.voltar = this.add.text(800, 100, '<', {
-      fontFamily: 'monospace',
-      font: '32px Courier',
+      fontFamily: 'Silkscreen',
+      fontSize: '32px',
       fill: '#ffffff'
     })
       .setInteractive()

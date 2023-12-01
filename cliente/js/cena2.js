@@ -273,7 +273,7 @@ export default class Cena2 extends Phaser.Scene {
     this.game.socket.on('botaoc2-notificar', (botao) => {
       if (botao.pressionado && this.portasobe2.setVelocityY !== 0) {
         this.botaoc2.setFrame(1)
-        this.portasobe2.setVelocityY(-30)
+        this.portasobe2.setVelocityY(-140)
       }
     })
     this.game.socket.on('portasobe2-notificar', ({ x, y, frame }) => {
@@ -332,7 +332,7 @@ export default class Cena2 extends Phaser.Scene {
     if (isOverlapping) {
       // Quando houver sobreposição, mude o sprite do botaoc2 para 1
       this.botaoc2.setFrame(1)
-      this.portasobe2.setVelocityY(-30)
+      this.portasobe2.setVelocityY(-60)
       this.game.socket.emit('botaoc2-publicar', this.game.sala, { pressionado: true })
     } else {
       // Caso contrário, mantenha o sprite do botaoc2 como 0
